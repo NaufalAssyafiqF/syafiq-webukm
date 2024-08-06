@@ -41,15 +41,7 @@ const HomeMain = () => {
         </div>
       </div>
 
-      <ProductSection title={"Rekomendasi Jasa"} />
-      <ProductSection title={"Rekomendasi Elektronik & Gadget"} />
-      <ProductSection title={"Rekomendasi Mobil"} />
-      <ProductSection title={"Rekomendasi Motor"} />
-      <ProductSection title={"Rekomendasi Fashion Pria"} />
-      <ProductSection title={"Rekomendasi Fashion Wanita"} />
-      <ProductSection title={"Rekomendasi Olahraga & Hobi"} />
-      <ProductSection title={"Rekomendasi Properti"} />
-      <ProductSection title={"Rekomendasi Perlengkapan Bayi & Anak"} />
+      <ProductSection />
 
       <FooterComponent />
     </div>
