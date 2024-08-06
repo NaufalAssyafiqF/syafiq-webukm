@@ -5,8 +5,10 @@ const PriceCard = ({produk}) => {
   return (
     <div className="bg-white py-5 px-5 h-[239px] flex flex-col justify-center rounded-xl">
       <div className="">
-        <h1 className="font-bold text-3xl leading-8">Rp. 12.000.000</h1>
-        <h2 className="font-medium text-xl">Iphone 11 Ibox Fullset</h2>
+        <h1 className="font-bold text-3xl leading-8">
+          Rp. {produk.data?.price_product}
+        </h1>
+        <h2 className="font-medium text-xl">{produk.data?.name_product}</h2>
         <table className="font-normal text-base text-[#52525B] my-2">
           <tbody>
             <tr>
@@ -15,9 +17,9 @@ const PriceCard = ({produk}) => {
               <td>{produk.data?.condition}</td>
             </tr>
             <tr>
-              <td>merek</td>
+              <td>Kategori</td>
               <td>:</td>
-              <td>{produk.data?.brend}</td>
+              <td>{produk.data?.category}</td>
             </tr>
           </tbody>
         </table>

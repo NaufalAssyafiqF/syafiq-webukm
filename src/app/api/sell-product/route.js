@@ -20,9 +20,12 @@ export async function POST(request) {
 
     if (images.length === 0) {
       return NextResponse.json({
-        message: "No images uploaded",
+        message: "gambar belum diupload",
+        isProductAdded: false,
       });
     }
+    console.log({gambar : images.length});
+    
    
     
     //validasi-validasi
@@ -30,15 +33,18 @@ export async function POST(request) {
     if (!verifikasiToken) {
         return NextResponse.json({
           message: "token tidak valid",
+          isProductAdded: false,
         });
     }
+    console.log({token : verifikasiToken});
+    
     const userId = verifikasiToken.id
 
-    if (!dataImage) {
-      return NextResponse.json({
-        message: "gambar tidak ada",
-      });
-    }
+    // if (!dataImage) {
+    //   return NextResponse.json({
+    //     message: "gambar tidak ada",
+    //   });
+    // }
 
     const dateid = Date.now().toString();
     const idProduk = `pr${dateid}`
@@ -59,7 +65,7 @@ export async function POST(request) {
     //set up cloud storage dengan key json file
     const storage = new Storage({
       projectId: "web-ukm-427815",
-      keyFilename: path.join(process.cwd(), "public/key-cloudstorage.json"),
+      keyFilename: path.join(process.cwd(), "public/gcp-key/key-cloudstorage.json"),
     });
 
     //menghubungkan ke folder cloud storage
@@ -104,15 +110,17 @@ export async function POST(request) {
 
 
     return NextResponse.json({
-      message: "gambar berhasil didapat dan diupload",
+      message: "produk berhasil ditambahkan",
+      isProductAdded: true
     //   urlImg: imageUrl,
     //   decodeToken: verifikasiToken
     });
     
   } catch (error) {
     return NextResponse.json({
-      message: "upload image tidak berhasil",
-      error: error.message,
+      message: "produk gagal ditambahkan",
+      errorMessage: error.message,
+      isProductAdded: false,
     });
   }
 }

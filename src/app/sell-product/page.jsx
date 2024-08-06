@@ -8,6 +8,8 @@ import { useDropzone } from "react-dropzone";
 const SellPage = () => {
   const [files, setFiles] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [isProductAdded, setIsProductAdded] = useState(false)
+  const [messageError, setMessageError] = useState("")
 
   const categories = [
     "Jasa",
@@ -72,6 +74,7 @@ const SellPage = () => {
     });
 
     try {
+      setMessageError("")
       const response = await fetch("http://localhost:3000/api/sell-product", {
         method: "POST",
         body: formData,
@@ -80,12 +83,21 @@ const SellPage = () => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+      
+      
+      // setMessageError(response.)
 
       const result = await response.json();
       console.log(result);
+      if (result.isProductAdded) {
+        setIsProductAdded(true)
+      }else {
+        setMessageError(result.message)
+      }
+
       // Handle success response
     } catch (error) {
-      console.error("Error:", error);
+      setMessageError("terjadi kesalahan pada server seilahkan coba dilain waktu")
       // Handle error response
     }
   };
@@ -97,7 +109,7 @@ const SellPage = () => {
         <h1 className="text-xl font-semibold text-[#3C6EBC] mb-10">
           Jual Produk/Jasa Baru
         </h1>
-        <form action="" className="">
+        <form className="" onSubmit={handleSubmit}>
           <div className="flex gap-x-9">
             <div className="w-[70%]">
               <label
@@ -174,7 +186,9 @@ const SellPage = () => {
                       ) : (
                         <p>
                           drag n drop file kamu atau{" "}
-                          <span className="text-blue-500 cursor-pointer">pilih disni</span>{" "}
+                          <span className="text-blue-500 cursor-pointer">
+                            pilih disni
+                          </span>{" "}
                         </p>
                       )}
                     </div>
@@ -213,10 +227,15 @@ const SellPage = () => {
               </div>
             </div>
           </div>
-          <button type="submit" className="bg-[#2E5F9E] hover:bg-[#3974c2] text-white font-semibold py-2 px-6 rounded-lg mt-5">
+          <button
+            type="submit"
+            className="bg-[#2E5F9E] hover:bg-[#3974c2] text-white font-semibold py-2 px-6 rounded-lg mt-5"
+          >
             Jual Porduk/Jasa
           </button>
         </form>
+        {messageError ? <h1 className="text-red-600 mt-4">*{messageError}</h1>: null}
+        {isProductAdded ? <h1 className="text-blue-600 mt-4">Produk berhasil ditambahkan ke list penjualan</h1> : null}
       </div>
       <FooterComponent />
     </div>

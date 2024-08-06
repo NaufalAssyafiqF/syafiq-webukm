@@ -8,11 +8,13 @@ import {
   WhatsappShareButton,
 } from "react-share";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { usePathname } from "next/navigation";
 
 const ShareProductButton = () => {
   const [isCopied, setIsCopied] = useState(false);
+  const pathname = "http://localhost:3000" + usePathname();
 
-  const shareUrl = window.location.href;
+  const shareUrl = pathname
 
   const handleCopy = () => {
     setIsCopied(true);
