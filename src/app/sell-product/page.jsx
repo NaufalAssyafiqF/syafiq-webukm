@@ -10,6 +10,7 @@ const SellPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [isProductAdded, setIsProductAdded] = useState(false)
   const [messageError, setMessageError] = useState("")
+  const [loading, setLoading] = useState(false)
 
   const categories = [
     "Jasa",
@@ -61,6 +62,7 @@ const SellPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true)
 
     const formData = new FormData();
     formData.append("namaProduk", event.target.productName.value);
@@ -88,7 +90,6 @@ const SellPage = () => {
       // setMessageError(response.)
 
       const result = await response.json();
-      console.log(result);
       if (result.isProductAdded) {
         setIsProductAdded(true)
       }else {
@@ -99,6 +100,8 @@ const SellPage = () => {
     } catch (error) {
       setMessageError("terjadi kesalahan pada server seilahkan coba dilain waktu")
       // Handle error response
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -229,13 +232,22 @@ const SellPage = () => {
           </div>
           <button
             type="submit"
-            className="bg-[#2E5F9E] hover:bg-[#3974c2] text-white font-semibold py-2 px-6 rounded-lg mt-5"
+            disabled={loading}
+            className={`bg-[#2E5F9E] hover:bg-[#3974c2] text-white font-semibold py-2 px-6 rounded-lg mt-5 ${
+              loading ? "cursor-not-allowed" : ""
+            }`}
           >
-            Jual Porduk/Jasa
+            {loading ? "Loading..." : "Jual Produk/Jasa"}
           </button>
         </form>
-        {messageError ? <h1 className="text-red-600 mt-4">*{messageError}</h1>: null}
-        {isProductAdded ? <h1 className="text-blue-600 mt-4">Produk berhasil ditambahkan ke list penjualan</h1> : null}
+        {messageError ? (
+          <h1 className="text-red-600 mt-4">*{messageError}</h1>
+        ) : null}
+        {isProductAdded ? (
+          <h1 className="text-blue-600 mt-4">
+            Produk berhasil ditambahkan ke list penjualan
+          </h1>
+        ) : null}
       </div>
       <FooterComponent />
     </div>

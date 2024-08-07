@@ -11,3 +11,27 @@
 .mySwiper .swiper-slide-thumb-active {
   opacity: 1;
 }
+
+/* Tambahkan CSS khusus untuk tombol navigasi */
+.custom-next-arrow,
+.custom-prev-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.custom-next-arrow::before,
+.custom-prev-arrow::before {
+  color: #F98930; /* Mengubah warna ikon panah menjadi biru */
+}
+
+.custom-next-arrow {
+  right: 10px; /* Ubah jarak dari sisi kanan */
+}
+
+.custom-prev-arrow {
+  left: 10px; /* Ubah jarak dari sisi kiri */
+}
+
+/* Style untuk gambar agar tidak keluar dari container */

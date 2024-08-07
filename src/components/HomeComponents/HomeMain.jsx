@@ -2,11 +2,12 @@ import React from "react";
 import CardIcon from "./CardIcon";
 import FooterComponent from "../FooterComponent";
 import ProductSection from "./ProductSection";
+import CarouselHero from "./CarouselHero";
 
 const HomeMain = () => {
   return (
     <div className="bg-slate-100">
-      <div className="w-full h-[280px] bg-blue-500 mt-10"></div>
+      <CarouselHero />
 
       <div className="px-10 mt-14 mb-20">
         <h1 className="text-xl font-semibold text-[#3C6EBC] mb-5">

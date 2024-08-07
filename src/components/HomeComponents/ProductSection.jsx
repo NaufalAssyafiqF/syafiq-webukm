@@ -21,11 +21,10 @@ const ProductSection = async () => {
         </h1>
       </div>
 
-      <div className="flex flex-wrap justify-between">
-        {dataProduct.data.map(product=>(
-          <CardProduct dataProduk={product}/>
+      <div className="grid gap-4 grid-cols-4 grid-rows-4">
+        {dataProduct.data?.map((product) => (
+          <CardProduct dataProduk={product} />
         ))}
-        
       </div>
     </div>
   );
