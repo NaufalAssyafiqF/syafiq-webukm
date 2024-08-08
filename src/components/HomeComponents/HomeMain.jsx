@@ -14,7 +14,7 @@ const HomeMain = () => {
           Jelajahi Web UKM
         </h1>
         <div className="flex">
-          <CardIcon icon="/images/jasa-icon.png" textIcon="Jasa" />
+          <CardIcon icon="/images/jasa-icon.png" textIcon="Jasa"/>
           <CardIcon
             icon="/images/elektronik-icon.png"
             textIcon="Elektronik & Gadget"

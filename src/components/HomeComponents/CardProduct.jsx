@@ -4,15 +4,16 @@ import { GrMap } from 'react-icons/gr';
 const CardProduct = ({dataProduk}) => {
   
   return (
-    <div className="w-72 h-[450px] bg-white rounded-md py-3 mb-5 flex flex-col justify-between border-2">
+    <div className="w-72 h-[450px] bg-white rounded-md py-3 mb-5 flex flex-col justify-between border-2 shadow-md">
       <div className="flex px-2 mb-2">
         <img
-          src={dataProduk.user.user_img}
+          src={dataProduk.user?.user_img}
           alt=""
           className="w-8 h-8 rounded-full"
+          lazy={true}
         />
         <div className="ms-2">
-          <h1 className="text-[#3F3F46] text-sm">{dataProduk.user.username}</h1>
+          <h1 className="text-[#3F3F46] text-sm">{dataProduk.user?.username}</h1>
           <p className="text-[#71717A] text-xs">1 Hari Yang Lalu</p>
         </div>
       </div>
@@ -28,7 +29,7 @@ const CardProduct = ({dataProduk}) => {
         <h2 className="font-semibold">RP. {dataProduk.price_product}</h2>
         <div className="flex items-center text-xs text-[#3F3F46]">
           <GrMap className="inline-block text-xl" />
-          <p>{dataProduk.user.alamat}</p>
+          <p>{dataProduk.user?.alamat}</p>
         </div>
       </div>
     </div>

@@ -29,7 +29,7 @@ function SamplePrevArrow(props) {
 
 export default function CarouselHero() {
     const settings = {
-      lazyLoad: true,
+      
       dots: true,
       infinite: true,
       speed: 500,
