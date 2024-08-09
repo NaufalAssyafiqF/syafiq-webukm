@@ -3,16 +3,15 @@ import React, { useState, useEffect } from "react";
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 
 const ProductCarousel = ({produk}) => {
-  const images = ["images/ipone1.jpg", "images/ipone2.jpg"];
 
   const [activeIndex, setActiveIndex] = useState(0);
 
   const nextSlide = () => {
-    setActiveIndex((activeIndex + 1) % images.length);
+    setActiveIndex((activeIndex + 1) % produk.imgUrl.length);
   };
 
   const prevSlide = () => {
-    setActiveIndex((activeIndex - 1 + images.length) % images.length);
+    setActiveIndex((activeIndex - 1 + produk.imgUrl.length) % produk.imgUrl.length);
   };
 
   const goToSlide = (index) => {

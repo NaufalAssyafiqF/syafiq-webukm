@@ -1,4 +1,5 @@
 "use client";
+import FooterComponent from "@/components/FooterComponent";
 import CardProduct from "@/components/HomeComponents/CardProduct";
 import TopBarComponent from "@/components/TopBarComponent";
 import React, { useState, useEffect } from "react";
@@ -19,6 +20,12 @@ const Products = () => {
   ];
 
   useEffect(() => {
+    // Ambil kategori yang disimpan di sessionStorage
+    const initialCategory = sessionStorage.getItem("filterProduct");
+    if (initialCategory) {
+      setSelectedCategories([initialCategory]);
+    }
+
     // Fetch data produk
     const fetchData = async () => {
       const response = await fetch("http://localhost:3000/api/filter-product");
@@ -59,6 +66,7 @@ const Products = () => {
                   value={category}
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2"
                   onChange={() => handleCategoryChange(category)}
+                  checked={selectedCategories.includes(category)}
                 />
                 <label
                   for={`category-${index}`}
@@ -76,6 +84,7 @@ const Products = () => {
           ))}
         </div>
       </div>
+      <FooterComponent />
     </div>
   );
 };
