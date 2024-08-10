@@ -14,7 +14,7 @@ const ProductSection = async () => {
   const dataProduct = await getDataProduct()
   
   return (
-    <div className="px-10 mt-10">
+    <div className="px-10 py-4 mt-10 bg-white mx-10 rounded-md">
       <div className="flex justify-between">
         <h1 className="text-xl font-semibold text-[#3C6EBC] mb-5">
           Rekomendasi Produk & Jasa

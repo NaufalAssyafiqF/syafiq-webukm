@@ -27,12 +27,15 @@ export async function POST(request) {
 
     const userId = Date.now().toString();
 
+    const userImg = "https://storage.cloud.google.com/goritmix-web-ukm/user-images/defaultavatar1.jpg"
+
     await prisma.user.create({
       data: {
         user_id: userId,
         email: email,
         password_hash: hashedPassword,
         username: username,
+        user_img: userImg,
       },
     });
 

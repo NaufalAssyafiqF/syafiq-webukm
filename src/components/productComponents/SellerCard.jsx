@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { FaChevronRight } from "react-icons/fa";
 import { GrMap } from "react-icons/gr";
@@ -22,10 +23,11 @@ const SellerCard = ({ produk }) => {
             </h1>
           </div>
         </div>
-        <button className="w-full border border-[#2E5F9E] text-[#2E5F9E] text-base rounded-lg py-2 px-4 mt-3 hover:bg-[#2E5F9E] hover:text-white group">
+
+        <Link href={`/user-profile/${produk.dataUser?.user_id}`} className="w-full border border-[#2E5F9E] text-[#2E5F9E] text-base rounded-lg py-2 px-4 mt-3 hover:bg-[#2E5F9E] hover:text-white group">
           Kunjungi Toko{" "}
           <FaChevronRight className="inline text-xs group-hover:text-white" />
-        </button>
+        </Link>
       </div>
     </div>
   );

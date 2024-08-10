@@ -10,8 +10,8 @@ const CardIcon = ({icon, textIcon}) => {
   }
 
   return (
-    <div className="w-32 h-32 flex flex-col items-center" onClick={handleNavigation}>
-      <div className="bg-white w-20 h-20 rounded-xl cursor-pointer">
+    <div className="w-32 h-40 flex flex-col items-center justify-center" onClick={handleNavigation}>
+      <div className="bg-white w-20 h-20 rounded-xl cursor-pointer shadow-md">
         <img src={icon} alt="" />
       </div>
       <p className="text-[#52525B] text-sm text-center mt-2">{textIcon}</p>

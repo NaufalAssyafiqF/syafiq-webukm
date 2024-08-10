@@ -10,7 +10,7 @@ const CardProduct = ({dataProduk}) => {
   }).format(dataProduk.price_product);
   
   return (
-    <Link href={`product/${dataProduk.product_id}`} className="w-72 h-[450px] bg-white rounded-md py-3 mb-5 flex flex-col justify-between border-2 shadow-md">
+    <Link href={`/product/${dataProduk.product_id}`} className="w-72 h-[450px] bg-white rounded-md py-3 mb-5 flex flex-col justify-between border-2 shadow-md">
       <div className="flex px-2 mb-2">
         <img
           src={dataProduk.user?.user_img}

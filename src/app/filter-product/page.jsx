@@ -50,11 +50,11 @@ const Products = () => {
     : products.data;
 
   return (
-    <div className="w-full h-full bg-slate-200">
+    <div className="w-full h-full bg-slate-200 ">
       <TopBarComponent />
-      <div className="flex ">
+      <div className="flex mx-10">
         <div className="w-[25%] h-[100vh] sticky top-0">
-          <div className="w-[90%] mx-auto p-4 bg-white mt-5 rounded shadow-md">
+          <div className="w-[90%] p-4 bg-white mt-5 rounded shadow-md">
             <h1 className="text-lg font-semibold text-blue-600 mb-2">
               Kategori
             </h1>
@@ -78,7 +78,7 @@ const Products = () => {
             ))}
           </div>
         </div>
-        <div className="w-[75%] grid gap-3 grid-cols-3 grid-rows-3 mt-5">
+        <div className="w-[75%] grid gap-3 grid-cols-3 grid-rows-3 mt-5 bg-white p-4 rounded">
           {filteredProducts?.map((product, index) => (
             <CardProduct key={index} dataProduk={product} />
           ))}

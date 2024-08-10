@@ -9,7 +9,7 @@ const HomeMain = () => {
     <div className="bg-slate-100">
       <CarouselHero />
 
-      <div className="px-10 mt-14 mb-20">
+      <div className="px-10 py-4 mt-14 mb-20 bg-white mx-10 rounded-md">
         <h1 className="text-xl font-semibold text-[#3C6EBC] mb-5">
           Jelajahi Web UKM
         </h1>
