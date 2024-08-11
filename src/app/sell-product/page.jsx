@@ -1,11 +1,13 @@
 "use client";
 import FooterComponent from "@/components/FooterComponent";
 import TopBarComponent from "@/components/TopBarComponent";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 const SellPage = () => {
+  const router = useRouter()
   const [files, setFiles] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [isProductAdded, setIsProductAdded] = useState(false)
@@ -104,6 +106,14 @@ const SellPage = () => {
       setLoading(false)
     }
   };
+
+  useEffect(() => {
+    const token = sessionStorage.getItem("token");
+    if (!token) {
+      router.push("/login");
+      return;
+    }
+  })
 
   return (
     <div className="bg-slate-100 w-full h-full">
