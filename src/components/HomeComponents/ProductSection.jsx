@@ -21,7 +21,7 @@ const ProductSection = async () => {
         </h1>
       </div>
 
-      <div className="grid gap-4 grid-cols-4 grid-rows-4">
+      <div className="grid gap-4 grid-cols-4">
         {dataProduct.data?.map((product) => (
           <CardProduct dataProduk={product} />
         ))}

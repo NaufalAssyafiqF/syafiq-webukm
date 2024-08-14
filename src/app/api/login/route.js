@@ -41,22 +41,6 @@ export async function POST(request) {
       image: user.user_img,
     };
     const createToken = generateToken(dataToken);
-    
-
-    // // Set HttpOnly cookie
-    // const response = NextResponse.json({
-    //   isLoggedIn: true,
-    //   message: "Login successful",
-    // });
-
-    // // const oneHour = 24 * 60 * 60 * 1000;
-    // cookies().set({
-    //   name: "token",
-    //   value: createToken,
-    //   httpOnly: true,
-    //   path: "/",
-    //   // expires: Date.now() - oneHour,
-    // });
 
     return NextResponse.json(
       {

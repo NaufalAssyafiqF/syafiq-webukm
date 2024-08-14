@@ -10,7 +10,6 @@ const MyProfilePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       const token = sessionStorage.getItem("token");
-      console.log(token);
       
       if (!token) {
         router.push("/login");
