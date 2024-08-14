@@ -31,11 +31,11 @@ const CardProduct = ({dataProduk}) => {
         />
       </div>
       <div className="px-2 flex flex-col gap-y-1">
-        <h1 className="text-[#71717A] text-sm">{dataProduk.name_product}</h1>
+        <h1 className="text-[#71717A] text-base font-medium">{dataProduk.name_product}</h1>
         <h2 className="font-semibold">{harga}</h2>
         <div className="flex items-center text-xs text-[#3F3F46]">
           <GrMap className="inline-block text-xl" />
-          <p>{dataProduk.user?.alamat}</p>
+          <p className='ms-1 font-medium text-sm'>{dataProduk.user?.kota}</p>
         </div>
       </div>
     </Link>

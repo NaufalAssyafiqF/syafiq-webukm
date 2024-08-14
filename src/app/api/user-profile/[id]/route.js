@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { IoGameController } from "react-icons/io5";
 
 export async function GET(request, { params }) {
   const { id } = params;
@@ -15,6 +16,8 @@ export async function GET(request, { params }) {
             username: true,
             user_img: true,
             alamat: true,
+            kota: true,
+            kota: true,
           },
         },
       },
@@ -28,6 +31,11 @@ export async function GET(request, { params }) {
         username: true,
         user_img: true,
         alamat: true,
+        kota: true,
+        deskripsi: true,
+        fb_link: true,
+        ig_link: true,
+        phone_number: true,
       },
     });
 

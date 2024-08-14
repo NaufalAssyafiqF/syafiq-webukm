@@ -20,7 +20,7 @@ const ProductCarousel = ({produk}) => {
 
   return (
     <div className="w-2/3 relative me-10 overflow-hidden rounded-xl">
-      <div className="h-[324px] relative overflow-hidden">
+      <div className="h-[80%] relative overflow-hidden">
         {produk.imgUrl?.map((image, index) => (
           <div
             key={index}
@@ -56,7 +56,7 @@ const ProductCarousel = ({produk}) => {
         </button>
       </div>
 
-      <div className="flex py-2 justify-center items-center bg-white">
+      <div className="h-[20%] flex py-2 justify-center items-center bg-white">
         {produk.imgUrl?.map((image, index) => (
           <div
             key={index}

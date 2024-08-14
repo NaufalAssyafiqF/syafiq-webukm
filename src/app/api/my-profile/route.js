@@ -12,10 +12,6 @@ export async function GET() {
     const token = authHeader.split(" ")[1];
     const isTokenVerified = verifyToken(token);
     
-
-    console.log(isTokenVerified.id);
-    
-
     const getProductDatas = await prisma.Product.findMany({
       where: {
         user_id: isTokenVerified.id,
@@ -27,6 +23,7 @@ export async function GET() {
             username: true,
             user_img: true,
             alamat: true,
+            kota: true,
           },
         },
       },
@@ -40,6 +37,11 @@ export async function GET() {
         username: true,
         user_img: true,
         alamat: true,
+        kota: true,
+        deskripsi: true,
+        fb_link: true,
+        ig_link: true,
+        phone_number: true,
       },
     });
 

@@ -29,6 +29,7 @@ export async function GET(request, { params }) {
         username: true,
         user_img: true,
         alamat: true,
+        kota: true,
       },
     });
 

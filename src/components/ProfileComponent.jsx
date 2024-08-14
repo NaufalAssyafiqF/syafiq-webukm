@@ -34,8 +34,7 @@ const ProfileComponent = ({getData, myProfile}) => {
               {getData.dataUser?.username}
             </h2>
             <p className="text-base font-medium mb-2">
-              toko penjualan alat elektronik bekas dan baru terbaik di daerah
-              bogor. barang banrang terjamin dan prosesnya cepat
+              {getData.dataUser?.deskripsi}
             </p>
             <hr className="mb-4" />
             <table className="">
@@ -44,19 +43,19 @@ const ProfileComponent = ({getData, myProfile}) => {
                   <td className="pr-3">
                     <FaPhone className="" />
                   </td>
-                  <td>081233344455</td>
+                  <td>{getData.dataUser?.phone_number}</td>
                 </tr>
                 <tr>
                   <td className="pr-3">
                     <FaMapMarkerAlt className="" />
                   </td>
-                  <td>Perumahan Pondok Citeureup Indah Blok C11 No1</td>
+                  <td>{getData.dataUser?.alamat}</td>
                 </tr>
                 <tr>
                   <td className="pr-3">
                     <FaCity className="" />
                   </td>
-                  <td>{getData.dataUser?.alamat}</td>
+                  <td>{getData.dataUser?.kota}</td>
                 </tr>
               </tbody>
             </table>
@@ -74,7 +73,7 @@ const ProfileComponent = ({getData, myProfile}) => {
                 <FaInstagram className="inline-block mr-2 text-2xl" />
               </div>
             </div>
-            {myProfile && (<hr className="mt-6 "/>)}
+            {myProfile && <hr className="mt-6 " />}
             {myProfile && (
               <Link href="/edit-profile">
                 <div className="bg-[#2E5F9E] text-white py-2 rounded-lg text-center w-full hover:bg-[#44699a] mt-4">

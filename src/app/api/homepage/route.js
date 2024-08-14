@@ -12,6 +12,7 @@ export async function GET(){
                username: true,
                user_img: true,
                alamat: true,
+               kota: true,
              },
            },
          },
