@@ -1,16 +1,31 @@
 "use client";
 import FooterComponent from "@/components/FooterComponent";
 import TopBarComponent from "@/components/TopBarComponent";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 const EditProfilePage = () => {
-  const [file, setFile] = useState([]);
+  const [file, setFile] = useState();
+  const [getData, setGetData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [isUpdated, setIsUpdated] = useState(false);
   const [image, setImage] = useState(
     "https://storage.cloud.google.com/goritmix-web-ukm/user-images/defaultavatar1.jpg"
   );
   const [messageError, setMessageError] = useState("");
+
+  const [valueField, setValueField] = useState({
+    username: "",
+    deskripsi: "",
+    alamat: "",
+    kota: "",
+    phoneNumber: "",
+    instagram: "",
+    facebook: "",
+    wa: "",
+  });
+
+  const token = sessionStorage.getItem("token");
 
   const onDrop = (acceptedFiles) => {
     const uploadedFile = acceptedFiles[0];
@@ -26,10 +41,112 @@ const EditProfilePage = () => {
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: "image/*",
-    maxSize: 5 * 1024 * 1024, // Batas maksimal 5 MB
+    maxSize: 20 * 1024 * 1024, // Batas maksimal 5 MB
   });
 
-  
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+
+    const formData = new FormData();
+    formData.append("username", event.target.username.value);
+    formData.append(
+      "deskripsi",
+      event.target.deskripsi.value
+    );
+    formData.append("alamat", event.target.alamat.value);
+    formData.append("kota", event.target.kota.value);
+    formData.append("phoneNumber", event.target.phoneNumber.value);
+    formData.append("fb_link", event.target.facebook.value);
+    formData.append("ig_link", event.target.instagram.value);
+    formData.append("wa_link", event.target.wa.value);
+    formData.append("image", file);
+
+    try {
+      setMessageError("");
+      const response = await fetch("http://localhost:3000/api/edit-profile", {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      // setMessageError(response.)
+
+      const result = await response.json();
+      if (result.isUpdated) {
+        setIsUpdated(true);
+      } else {
+        setMessageError(result.message);
+      }
+
+      // Handle success response
+    } catch (error) {
+      setMessageError(
+        "terjadi kesalahan pada server seilahkan coba dilain waktu"
+      );
+      // Handle error response
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setValueField({
+      ...valueField,
+      [name]: value,
+    });
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!token) {
+        return;
+      }
+      const response = await fetch("/api/edit-profile", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const result = await response.json();
+      if (response.ok) {
+        setGetData(result.data);
+        setFile(result.data?.user_img);
+        setImage(result.data?.user_img);
+
+        setValueField({
+          username: result.data?.username || "",
+          deskripsi: result.data?.deskripsi || "",
+          alamat: result.data?.alamat || "",
+          kota: result.data?.kota || "",
+          phoneNumber: result.data?.phone_number || "",
+          instagram: result.data?.ig_link || "",
+          facebook: result.data?.fb_link || "",
+          wa: result.data?.wa_link || "",
+        });
+      } else {
+        console.error("gagal mengambil data pengguna");
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (!getData) {
+    return (
+      <div className="w-screen h-screen flex items-center justify-center">
+        <span class="loader"></span>
+      </div>
+    ); // atau Anda bisa menampilkan spinner/loading indicator
+  }
+
   return (
     <div className="bg-slate-100 w-full h-full">
       <TopBarComponent />
@@ -37,7 +154,7 @@ const EditProfilePage = () => {
         <h1 className="text-xl font-semibold text-[#3C6EBC] mb-10">
           Update Profile
         </h1>
-        <form className="" onSubmit="">
+        <form className="" onSubmit={handleSubmit}>
           <div className="flex gap-x-9">
             <div className="w-[70%]">
               <label
@@ -50,31 +167,37 @@ const EditProfilePage = () => {
                 type="text"
                 name="username"
                 id="username"
+                value={valueField.username}
+                onChange={handleInputChange}
                 className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-6"
                 required
               />
               <label
-                htmlFor="profileDescription"
+                htmlFor="deskripsi"
                 className="block mb-2 text-sm font-medium"
               >
                 Deskripsi Profile
               </label>
               <textarea
-                name="profileDescription"
-                id="profileDescription"
+                name="deskripsi"
+                id="deskripsi"
                 rows="10"
+                value={valueField.deskripsi}
+                onChange={handleInputChange}
                 className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-6"
               ></textarea>
               <label
-                htmlFor="adress"
+                htmlFor="alamat"
                 className="block mb-2 text-sm font-medium"
               >
                 Alamat
               </label>
               <input
                 type="text"
-                name="adress"
-                id="adress"
+                name="alamat"
+                id="alamat"
+                value={valueField.alamat}
+                onChange={handleInputChange}
                 className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-6"
                 required
               />
@@ -107,28 +230,32 @@ const EditProfilePage = () => {
               </div>
               <div>
                 <label
-                  htmlFor="city"
+                  htmlFor="kota"
                   className="block mb-2 text-sm font-medium"
                 >
                   Kota
                 </label>
                 <input
                   type="text"
-                  name="city"
-                  id="city"
+                  name="kota"
+                  id="kota"
+                  value={valueField.kota}
+                  onChange={handleInputChange}
                   className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-6"
                   required
                 />
                 <label
-                  htmlFor="city"
+                  htmlFor="phoneNumber"
                   className="block mb-2 text-sm font-medium"
                 >
                   No Telpon Genggam
                 </label>
                 <input
                   type="number"
-                  name="city"
-                  id="city"
+                  name="phoneNumber"
+                  id="phoneNumber"
+                  value={valueField.phoneNumber}
+                  onChange={handleInputChange}
                   className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-6"
                   required
                 />
@@ -143,12 +270,14 @@ const EditProfilePage = () => {
               htmlFor="instagram"
               className="block mb-2 text-sm font-medium"
             >
-              Instagram
+              instagram"
             </label>
             <input
               type="text"
               name="instagram"
               id="instagram"
+              value={valueField.instagram}
+              onChange={handleInputChange}
               className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-6"
             />
             <label
@@ -161,15 +290,19 @@ const EditProfilePage = () => {
               type="text"
               name="facebook"
               id="facebook"
+              value={valueField.facebook}
+              onChange={handleInputChange}
               className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-6"
             />
-            <label htmlFor="city" className="block mb-2 text-sm font-medium">
+            <label htmlFor="wa" className="block mb-2 text-sm font-medium">
               No terhubung Whatsapp
             </label>
             <input
               type="text"
-              name="city"
-              id="city"
+              name="wa"
+              id="wa"
+              value={valueField.wa}
+              onChange={handleInputChange}
               className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-6"
             />
           </div>
@@ -183,14 +316,12 @@ const EditProfilePage = () => {
             {loading ? "Loading..." : "Jual Produk/Jasa"}
           </button>
         </form>
-        {/* {messageError ? (
+        {messageError ? (
           <h1 className="text-red-600 mt-4">*{messageError}</h1>
         ) : null}
-        {isProductAdded ? (
-          <h1 className="text-blue-600 mt-4">
-            Produk berhasil ditambahkan ke list penjualan
-          </h1>
-        ) : null} */}
+        {isUpdated ? (
+          <h1 className="text-blue-600 mt-4">Pofile Berhasil Diupdate</h1>
+        ) : null}
       </div>
       <FooterComponent />
     </div>

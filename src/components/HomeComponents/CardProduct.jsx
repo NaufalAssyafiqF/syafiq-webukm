@@ -8,6 +8,14 @@ const CardProduct = ({dataProduk}) => {
     currency: "IDR",
     maximumFractionDigits: 0,
   }).format(dataProduk.price_product);
+
+  if(!dataProduk){
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <span class="loader"></span>
+      </div>
+    );
+  }
   
   return (
     <Link href={`/product/${dataProduk.product_id}`} className="w-72 h-[450px] bg-white rounded-md py-3 mb-5 flex flex-col justify-between border-2 shadow-md">
@@ -28,6 +36,7 @@ const CardProduct = ({dataProduk}) => {
           src={dataProduk.image_urls[0].image_url}
           alt=""
           className="w-72 h-72 object-contain"
+          lazy={true}
         />
       </div>
       <div className="px-2 flex flex-col gap-y-1">

@@ -37,7 +37,11 @@ const MyProfilePage = () => {
 
 
   if (!getData) {
-    return <div></div>; // atau Anda bisa menampilkan spinner/loading indicator
+    return (
+      <div className="w-screen h-screen flex items-center justify-center">
+        <span class="loader"></span>
+      </div>
+    ); // atau Anda bisa menampilkan spinner/loading indicator
   }
   return (
     <ProfileComponent getData={getData} myProfile={true}/>
