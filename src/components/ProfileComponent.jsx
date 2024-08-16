@@ -34,7 +34,9 @@ const ProfileComponent = ({getData, myProfile}) => {
               {getData.dataUser?.username}
             </h2>
             <p className="text-base font-medium mb-2">
-              {getData.dataUser?.deskripsi}
+              {getData.dataUser?.deskripsi
+                ? getData.dataUser?.deskripsi
+                : "Tidak ada deskripsi"}
             </p>
             <hr className="mb-4" />
             <table className="">
@@ -43,19 +45,27 @@ const ProfileComponent = ({getData, myProfile}) => {
                   <td className="pr-3">
                     <FaPhone className="" />
                   </td>
-                  <td>{getData.dataUser?.phone_number}</td>
+                  <td>
+                    {getData.dataUser?.phone_number
+                      ? getData.dataUser?.phone_number
+                      : "-"}
+                  </td>
                 </tr>
                 <tr>
                   <td className="pr-3">
                     <FaMapMarkerAlt className="" />
                   </td>
-                  <td>{getData.dataUser?.alamat}</td>
+                  <td>
+                    {getData.dataUser?.alamat ? getData.dataUser?.alamat : "-"}
+                  </td>
                 </tr>
                 <tr>
                   <td className="pr-3">
                     <FaCity className="" />
                   </td>
-                  <td>{getData.dataUser?.kota}</td>
+                  <td>
+                    {getData.dataUser?.kota ? getData.dataUser?.kota : "-"}
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -63,15 +73,35 @@ const ProfileComponent = ({getData, myProfile}) => {
               Media Sosial
             </h1>
             <div>
-              <div className="bg-[#2E5F9E] text-white py-2 rounded-lg text-center w-full hover:bg-[#44699a] mt-3">
-                <FaFacebook className="inline-block mr-2 text-2xl" />
-              </div>
-              <div className="bg-[#25d366] text-white py-2 rounded-lg text-center w-full hover:bg-[#2cf575] mt-3">
-                <FaWhatsapp className="inline-block mr-2 text-2xl" />
-              </div>
-              <div className="bg-[#DD2A7B] text-white py-2 rounded-lg text-center w-full hover:bg-[#f73089] mt-3">
-                <FaInstagram className="inline-block mr-2 text-2xl" />
-              </div>
+              <Link
+                href={
+                  getData.dataUser?.fb_link ? getData.dataUser?.fb_link : "#"
+                }
+              >
+                <div className="bg-[#2E5F9E] text-white py-2 rounded-lg text-center w-full hover:bg-[#44699a] mt-3">
+                  <FaFacebook className="inline-block mr-2 text-2xl" />
+                </div>
+              </Link>
+
+              <Link
+                href={
+                  getData.dataUser?.fb_link ? getData.dataUser?.fb_link : "#"
+                }
+              >
+                <div className="bg-[#25d366] text-white py-2 rounded-lg text-center w-full hover:bg-[#2cf575] mt-3">
+                  <FaWhatsapp className="inline-block mr-2 text-2xl" />
+                </div>
+              </Link>
+
+              <Link
+                href={
+                  getData.dataUser?.ig_link ? getData.dataUser?.ig_link : "#"
+                }
+              >
+                <div className="bg-[#DD2A7B] text-white py-2 rounded-lg text-center w-full hover:bg-[#f73089] mt-3">
+                  <FaInstagram className="inline-block mr-2 text-2xl" />
+                </div>
+              </Link>
             </div>
             {myProfile && <hr className="mt-6 " />}
             {myProfile && (
@@ -88,11 +118,19 @@ const ProfileComponent = ({getData, myProfile}) => {
           <h1 className="text-xl font-semibold text-blue-600 mb-2">
             Produk Toko
           </h1>
-          <div className=" grid gap-3 grid-cols-3">
-            {getData?.data.map((product, index) => (
-              <CardProduct key={index} dataProduk={product} />
-            ))}
-          </div>
+          {getData.data?.length === 0 ? (
+            <div className="flex justify-center items-center w-full h-[400px]">
+              <h1 className="text-gray-500 text-lg">
+                Toko belum memiliki produk
+              </h1>
+            </div>
+          ) : (
+            <div className="w-full h-full grid gap-3 grid-cols-3">
+              {getData.data?.map((product, index) => (
+                <CardProduct key={index} dataProduk={product} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
       <FooterComponent />

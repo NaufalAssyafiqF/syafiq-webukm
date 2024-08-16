@@ -1,4 +1,4 @@
-import { verifyToken } from "@/libs/jwt";
+import { generateToken, verifyToken } from "@/libs/jwt";
 import prisma from "@/libs/prisma";
 import { Storage } from "@google-cloud/storage";
 import { log } from "console";
@@ -30,6 +30,7 @@ export async function GET(request) {
         fb_link: true,
         ig_link: true,
         phone_number: true,
+        wa_link: true,
       },
     });
 
@@ -89,9 +90,6 @@ export async function PUT(request) {
     let imageUrl = image;
 
     if (image !== verifikasiToken.image) {
-        console.log(image);
-        console.log(verifikasiToken.image);
-        
         
       //set up cloud storage dengan key json file
       const storage = new Storage({
@@ -112,6 +110,25 @@ export async function PUT(request) {
       const sanitizedFileName = originalFileName.replace(/\s+/g, "_"); //handle jika nama terdapat spasi
 
       const bucket = storage.bucket(bucketName);
+
+      const defaultUserImage =
+        "https://storage.cloud.google.com/goritmix-web-ukm/user-images/defaultavatar1.jpg";
+      //menghapus gambar lama dari gcp
+      if (verifikasiToken.image !== defaultUserImage) {
+        const oldImageUrl = verifikasiToken.image;
+        const oldFileName = oldImageUrl.split("/").pop();
+        
+        const oldFile = bucket.file(`${folderName}/${oldFileName}`);
+        
+
+        try {
+          await oldFile.delete();
+          console.log(`Gambar lama ${oldFileName} berhasil dihapus.`);
+        } catch (err) {
+          console.error(`Gagal menghapus gambar lama: ${err.message}`);
+        }
+      }
+
       const filename = `${folderName}/usr${dateName}-${sanitizedFileName}`;
       const fileUpload = bucket.file(filename);
       const buffer = Buffer.from(await image.arrayBuffer());
@@ -142,9 +159,17 @@ export async function PUT(request) {
       },
     });
 
+    const dataToken = {
+      id: userId,
+      username: username,
+      image: imageUrl,
+    };
+    const createToken = generateToken(dataToken);
+
     return NextResponse.json({
       message: "Profile berhasil diupdate",
       isUpdated: true,
+      token: createToken,
     });
   } catch (error) {
     console.log(error);

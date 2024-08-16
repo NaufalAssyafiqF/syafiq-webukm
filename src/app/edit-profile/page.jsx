@@ -22,7 +22,7 @@ const EditProfilePage = () => {
     phoneNumber: "",
     instagram: "",
     facebook: "",
-    wa: "",
+    whatsapp: "",
   });
 
   const token = sessionStorage.getItem("token");
@@ -59,7 +59,7 @@ const EditProfilePage = () => {
     formData.append("phoneNumber", event.target.phoneNumber.value);
     formData.append("fb_link", event.target.facebook.value);
     formData.append("ig_link", event.target.instagram.value);
-    formData.append("wa_link", event.target.wa.value);
+    formData.append("wa_link", event.target.whatsapp.value);
     formData.append("image", file);
 
     try {
@@ -72,15 +72,16 @@ const EditProfilePage = () => {
         body: formData,
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+      // if (!response.ok) {
+      //   throw new Error(`HTTP error! status: ${response.status}`);
+      // }
 
       // setMessageError(response.)
 
       const result = await response.json();
       if (result.isUpdated) {
         setIsUpdated(true);
+        sessionStorage.setItem("token", result.token);
       } else {
         setMessageError(result.message);
       }
@@ -129,7 +130,7 @@ const EditProfilePage = () => {
           phoneNumber: result.data?.phone_number || "",
           instagram: result.data?.ig_link || "",
           facebook: result.data?.fb_link || "",
-          wa: result.data?.wa_link || "",
+          whatsapp: result.data?.wa_link || "",
         });
       } else {
         console.error("gagal mengambil data pengguna");
@@ -270,7 +271,7 @@ const EditProfilePage = () => {
               htmlFor="instagram"
               className="block mb-2 text-sm font-medium"
             >
-              instagram"
+              instagram
             </label>
             <input
               type="text"
@@ -294,17 +295,21 @@ const EditProfilePage = () => {
               onChange={handleInputChange}
               className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-6"
             />
-            <label htmlFor="wa" className="block mb-2 text-sm font-medium">
-              No terhubung Whatsapp
+            <label
+              htmlFor="whatsapp"
+              className="block mb-2 text-sm font-medium"
+            >
+              No HP terhubung whatsapp
             </label>
             <input
               type="text"
-              name="wa"
-              id="wa"
-              value={valueField.wa}
+              name="whatsapp"
+              id="whatsapp"
+              value={valueField.whatsapp}
               onChange={handleInputChange}
               className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-6"
             />
+            
           </div>
           <button
             type="submit"
