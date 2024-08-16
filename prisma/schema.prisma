@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
@@ -49,6 +50,7 @@ model Product {
   updatedAt           DateTime    @default(now()) @db.Timestamp(0)
 
   @@map("products")
+  @@fulltext([name_product])
 }
 
 model ImageUrl {
