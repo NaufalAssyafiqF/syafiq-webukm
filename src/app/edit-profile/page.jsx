@@ -318,7 +318,7 @@ const EditProfilePage = () => {
               loading ? "cursor-not-allowed" : ""
             }`}
           >
-            {loading ? "Loading..." : "Jual Produk/Jasa"}
+            {loading ? "Loading..." : "Update Profile"}
           </button>
         </form>
         {messageError ? (

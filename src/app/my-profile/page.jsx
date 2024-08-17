@@ -37,7 +37,7 @@ const MyProfilePage = () => {
 
 
   if (!getData) {
-    return (
+  return (
       <div className="w-screen h-screen flex items-center justify-center">
         <span class="loader"></span>
       </div>

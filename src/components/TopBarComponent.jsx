@@ -16,8 +16,8 @@ const TopBarComponent = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
 
-  const handleSearch = () => {
-    
+  const handleSearch = (e) => {
+    e.preventDefault();
     if (searchQuery.trim()) {
       router.push(`/search-product?search=${encodeURIComponent(searchQuery)}`);
     }

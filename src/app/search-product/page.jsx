@@ -25,7 +25,7 @@ const SearchProductPage = () => {
     };
 
     getFetchData();
-  }, []);
+  }, [search]);
 
   if (!dataProduct) {
     return (
