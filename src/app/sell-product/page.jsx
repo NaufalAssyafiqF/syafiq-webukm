@@ -14,6 +14,7 @@ const SellPage = () => {
   const [messageError, setMessageError] = useState("")
   const [loading, setLoading] = useState(false)
 
+  //  aarray kategori
   const categories = [
     "Jasa",
     "Elektronik & Gadget",
@@ -26,6 +27,7 @@ const SellPage = () => {
     "Perlengkapan Bayi & Anak",
   ];
 
+  // handle input
   const handleChange = (event) => {
     setSelectedCategory(event.target.value);
   };
@@ -39,7 +41,6 @@ const SellPage = () => {
   });
 
   
-
   const thumbs = files.map((file, index) => (
     <div key={file.name} className="w-24 h-24 bg-gray-200 rounded relative">
       <img

@@ -10,6 +10,7 @@ const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  // handling submit data
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
@@ -19,6 +20,7 @@ const LoginForm = () => {
     const password = formData.get("password");
 
     try {
+      // mengambil data dari API
       const response = await fetch("/api/login", {
         method: "POST",
         headers: {
@@ -32,6 +34,7 @@ const LoginForm = () => {
       const result = await response.json();
 
       if (response.ok) {
+        // menyimpan token pada session storage
         sessionStorage.setItem("token", result.token); 
 
         router.push("/");

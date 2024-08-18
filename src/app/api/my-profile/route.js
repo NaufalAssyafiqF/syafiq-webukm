@@ -9,9 +9,11 @@ export async function GET() {
     return NextResponse.json({ error: "Unauthorized", isTokenVerified: false });
   }
   try {
+    // mengambil token & verifikasi token
     const token = authHeader.split(" ")[1];
     const isTokenVerified = verifyToken(token);
     
+    // mengambil data product dari database berdasarkan user_id
     const getProductDatas = await prisma.Product.findMany({
       where: {
         user_id: isTokenVerified.id,
@@ -29,6 +31,7 @@ export async function GET() {
       },
     });
 
+    // mengambil data user dari database berdasarkan user_id
     const getUserDatas = await prisma.user.findUnique({
       where: {
         user_id: isTokenVerified.id,

@@ -9,14 +9,17 @@ const path = require("path");
 export async function GET(request) {
   const authHeader = headers().get("Authorization");
 
+  //validation ketika tidak ada header auth
   if (!authHeader) {
     return NextResponse.json({ error: "Unauthorized", isTokenVerified: false });
   }
 
   try {
+    //mengambil token & verifikasi token
     const token = authHeader.split(" ")[1];
     const isTokenVerified = verifyToken(token);
 
+    // mengambil data user dari database
     const getUserDatas = await prisma.user.findUnique({
       where: {
         user_id: isTokenVerified.id,
@@ -61,21 +64,9 @@ export async function PUT(request) {
 
   const image = formData.get("image");
 
-  console.log(image);
-
-  console.log({
-    username: username,
-    deskripsi: deskripsi,
-    kondisi: kondisi,
-    harga: harga,
-    kategori: kategori,
-    instagram: instagram,
-    facebook: facebook,
-    whatsapp: whatsapp,
-  });
 
   try {
-    //validasi-validasi
+    // verifikasi token dan validasi token
     const verifikasiToken = verifyToken(token);
     if (!verifikasiToken) {
       return NextResponse.json({
@@ -83,12 +74,12 @@ export async function PUT(request) {
         isUpdated: false,
       });
     }
-    console.log({ token: verifikasiToken });
 
     const userId = verifikasiToken.id;
 
     let imageUrl = image;
 
+    // validasi ketika gambar user diperbarui
     if (image !== verifikasiToken.image) {
         
       //set up cloud storage dengan key json file
@@ -113,7 +104,8 @@ export async function PUT(request) {
 
       const defaultUserImage =
         "https://storage.cloud.google.com/goritmix-web-ukm/user-images/defaultavatar1.jpg";
-      //menghapus gambar lama dari gcp
+      
+      // menghapus gambar lama dari gcp
       if (verifikasiToken.image !== defaultUserImage) {
         const oldImageUrl = verifikasiToken.image;
         const oldFileName = oldImageUrl.split("/").pop();
@@ -128,7 +120,8 @@ export async function PUT(request) {
           console.error(`Gagal menghapus gambar lama: ${err.message}`);
         }
       }
-
+      
+      // upload gambar ke cloud storage
       const filename = `${folderName}/usr${dateName}-${sanitizedFileName}`;
       const fileUpload = bucket.file(filename);
       const buffer = Buffer.from(await image.arrayBuffer());
@@ -144,6 +137,7 @@ export async function PUT(request) {
       imageUrl = `https://storage.cloud.google.com/goritmix-web-ukm/user-images/usr${dateName}-${sanitizedFileName}`;
     }
 
+    // update data user di database
     await prisma.user.update({
       where: { user_id: userId },
       data: {

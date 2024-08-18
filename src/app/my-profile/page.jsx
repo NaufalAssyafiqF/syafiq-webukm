@@ -8,6 +8,7 @@ const MyProfilePage = () => {
   const router = useRouter();
 
   useEffect(() => {
+    // Fungsi untuk mengambil data pengguna dari API
     const fetchData = async () => {
       const token = sessionStorage.getItem("token");
       
@@ -36,6 +37,7 @@ const MyProfilePage = () => {
   }, [router]);
 
 
+  // Jika data pengguna tidak ada, tampilkan loading indicator
   if (!getData) {
   return (
       <div className="w-screen h-screen flex items-center justify-center">

@@ -13,6 +13,7 @@ const SearchProductPage = () => {
 
   useEffect(() => {
     if (!search) return;
+    // mengambil semua data product dari API berdasarkan query search
     const getFetchData = async () => {
       const response = await fetch(
         `http://localhost:3000/api/search-product?search=${search}`,
@@ -27,6 +28,7 @@ const SearchProductPage = () => {
     getFetchData();
   }, [search]);
 
+  
   if (!dataProduct) {
     return (
       <div className="w-screen h-screen flex items-center justify-center">

@@ -3,6 +3,7 @@ import CardProduct from './CardProduct';
 
 
 const getDataProduct = async () => {
+  // mengambil data dari API
   const response = await fetch(`http://localhost:3000/api/homepage`, {
         next: { revalidate: 10 },
       });

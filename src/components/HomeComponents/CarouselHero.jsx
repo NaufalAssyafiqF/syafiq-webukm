@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "@/app/globals.css";
 
+// handle button untuk navigasi carousel
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return (

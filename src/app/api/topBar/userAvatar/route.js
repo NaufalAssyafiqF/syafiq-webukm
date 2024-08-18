@@ -6,6 +6,7 @@ import { headers } from "next/headers";
 export async function GET() {
   const authHeader = headers().get("Authorization");
 
+  // validasi header auth
   if (!authHeader) {
     return NextResponse.json(
       { error: "Unauthorized", isTokenVerified: false },

@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(){
     try {
+      // mengambil semua data product
        const getProductDatas = await prisma.Product.findMany({
          include: {
            image_urls: true,

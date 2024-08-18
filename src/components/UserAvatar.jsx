@@ -10,6 +10,7 @@ const UserAvatar = ({ userData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
+  // handling untuk logout dari akun
   const handleLogout = () => {
     sessionStorage.removeItem("token");
     window.location.reload();

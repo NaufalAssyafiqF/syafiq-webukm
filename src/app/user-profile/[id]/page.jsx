@@ -1,7 +1,7 @@
 import React from "react";
 import ProfileComponent from "@/components/ProfileComponent";
 
-
+// mengambil data dari API
 const getFectdata = async (params) => {
   const response = await fetch(
     `http://localhost:3000/api/user-profile/${params.id}`,

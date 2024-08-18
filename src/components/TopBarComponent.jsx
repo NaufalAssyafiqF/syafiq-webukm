@@ -16,6 +16,7 @@ const TopBarComponent = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
 
+  // handling untuk melakukan search
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {

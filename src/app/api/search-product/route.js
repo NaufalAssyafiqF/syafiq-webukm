@@ -6,6 +6,7 @@ export async function GET(request) {
   const query = searchParams.get("search");
 
   try {
+    // mengambil semua data product berdasarkan query search
     const getProductDatas = await prisma.Product.findMany({
       where: {
         name_product: {
@@ -25,6 +26,7 @@ export async function GET(request) {
       },
     });
 
+    // validasi jika data product tidak ditemukan
     if (getProductDatas.length === 0) {
       return NextResponse.json({
         message: "data produk tidak ditemukan",

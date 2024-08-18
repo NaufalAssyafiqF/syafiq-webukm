@@ -2,6 +2,7 @@ import React from 'react'
 import { FaWhatsapp } from "react-icons/fa";
 
 const PriceCard = ({produk}) => {
+  // konversi nilai harga ke bentuk rupiah
   const harga = new Intl.NumberFormat("id", {
     style: "currency",
     currency: "IDR",

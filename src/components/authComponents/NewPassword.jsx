@@ -19,6 +19,7 @@ const NewPassword = ({ handleUpdatePassword }) => {
   const searchParams = useSearchParams();
   const resetToken = searchParams.get("token");
 
+  // membaut handling untuk hide password
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -26,6 +27,7 @@ const NewPassword = ({ handleUpdatePassword }) => {
     setShowPassword2(!showPassword2);
   };
 
+  // membuat handling submit
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
@@ -34,10 +36,12 @@ const NewPassword = ({ handleUpdatePassword }) => {
     const newPassword = formData.get("newPassword");
     const confirmPassword = formData.get("confirmPassword");
 
+    // validasi password tidak sama
     setPasswordsMatch(newPassword === confirmPassword);
 
     if (newPassword === confirmPassword) {
       try {
+        // mengambil data dari API
         const response = await fetch("/api/forgot-password/new-password", {
           method: "PUT",
           headers: {

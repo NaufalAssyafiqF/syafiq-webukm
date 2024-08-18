@@ -5,6 +5,7 @@ export async function GET(request, { params }) {
   const { id } = params;
 
   try {
+    // mengambil semua data produk berdasarkan id
     const getProductDatas = await prisma.Product.findMany({
       where: {
         user_id: id,
@@ -23,6 +24,7 @@ export async function GET(request, { params }) {
       },
     });
 
+    // mengambil data user berdasarkan id
     const getUserDatas = await prisma.user.findUnique({
       where: {
         user_id: id,

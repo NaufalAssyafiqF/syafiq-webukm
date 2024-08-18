@@ -8,10 +8,12 @@ export async function POST(request) {
     const data = await request.json();
     const { email } = data;
 
+    // mengambil data user berdasarkan email
     const user = await prisma.user.findUnique({
       where: { email },
     });
 
+    // validasi user ditemukan atau tidak
     if (!user) {
       return NextResponse.json(
         {
@@ -26,6 +28,7 @@ export async function POST(request) {
     }
     const createToken = generateToken(payload);
 
+    // membuat link reset password
     const subject = "Forgot Password Link";
     const text = `http://localhost:3000/forgot-password/new-password?token=${createToken}`;
     await sendEmailHandler(email, subject, text);

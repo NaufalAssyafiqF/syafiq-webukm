@@ -6,21 +6,22 @@ export async function GET(request) {
         const data = await request.json();
         const { id } = data;
 
+        // mengambil data product dari database berdasarkan id
         const dataProduct = await prisma.products.findUnique({
           where: { product_id: id },
         });
-        console.log(dataProduct);
 
+        // validasi jika produk tdak ditemukan
         if(!dataProduct) {
             return NextResponse.json({
                 message: "data product tidak ditemukan",
             });
         }
 
+        // mengambil data image product
         const dataProductImage = await prisma.image_urls.findUnique({
           where: { product_id: id },
         });
-        console.log(dataProductImage);
 
         return NextResponse.json({
             message: "data product berhasil didapat",

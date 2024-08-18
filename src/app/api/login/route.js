@@ -10,10 +10,12 @@ export async function POST(request) {
     const data = await request.json();
     const { email, password } = data;
 
+    // mengambil data user berdasarkan email
     const user = await prisma.user.findUnique({
       where: { email },
     });
 
+    // validasi user ditemukan atau tidak
     if (!user) {
       return NextResponse.json(
         {
@@ -24,6 +26,7 @@ export async function POST(request) {
       );
     }
 
+    // validasi password
     const passwordMatch = await bcrypt.compare(password, user.password_hash);
 
     if (!passwordMatch) {
@@ -35,6 +38,8 @@ export async function POST(request) {
         { status: 401 }
       );
     }
+
+    // membuat token
     const dataToken = {
       id: user.user_id,
       username: user.username,

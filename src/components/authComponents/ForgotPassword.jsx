@@ -7,6 +7,7 @@ const ForgotPassword = () => {
   const [messageError, setMessageError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // handling submit data
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true)

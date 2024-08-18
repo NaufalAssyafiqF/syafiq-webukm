@@ -6,6 +6,7 @@ const ProductCarousel = ({produk}) => {
 
   const [activeIndex, setActiveIndex] = useState(0);
 
+  // handling slide navigation pada carousel
   const nextSlide = () => {
     setActiveIndex((activeIndex + 1) % produk.imgUrl.length);
   };

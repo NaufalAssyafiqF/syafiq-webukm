@@ -6,12 +6,13 @@ export async function POST(request) {
   try {
     const data = await request.json();
     const { email, username, password } = data;
-    console.log(email, username, password);
 
+    // mengambil data user berdasarkan email
     const existingEmail = await prisma.user.findUnique({
       where: { email },
     });
 
+    // validasi email sudah terpakai atau belum
     if (existingEmail) {
       return NextResponse.json(
         {
@@ -22,6 +23,7 @@ export async function POST(request) {
       );
     }
 
+    // membuat hash password
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
@@ -29,6 +31,7 @@ export async function POST(request) {
 
     const userImg = "https://storage.cloud.google.com/goritmix-web-ukm/user-images/defaultavatar1.jpg"
 
+    // membuat data baru user
     await prisma.user.create({
       data: {
         user_id: userId,

@@ -7,6 +7,7 @@ const RedirectComponent = ({text1, text2, imageInfo}) => {
   const router = useRouter();
 
   useEffect(() => {
+    // membuat timer otomatis
     const timer = setInterval(() => {
       if (countdown > 1) {
         setCountdown(countdown - 1);

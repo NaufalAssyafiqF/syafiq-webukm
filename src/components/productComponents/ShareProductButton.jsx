@@ -16,6 +16,7 @@ const ShareProductButton = () => {
 
   const shareUrl = pathname
 
+  // handle untuk mengcopy url
   const handleCopy = () => {
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 1500);

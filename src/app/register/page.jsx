@@ -6,6 +6,7 @@ import React, { useState } from "react";
 const RegisterPage = () => {
   const [isAccountCreated, setIsAccountCreated] = useState(false);
 
+  // handling submit data
   const handleFormSubmit = () => {
     setIsAccountCreated(true);
   };

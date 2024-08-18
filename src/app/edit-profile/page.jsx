@@ -14,6 +14,7 @@ const EditProfilePage = () => {
   );
   const [messageError, setMessageError] = useState("");
 
+  // membuat objek state
   const [valueField, setValueField] = useState({
     username: "",
     deskripsi: "",
@@ -25,8 +26,10 @@ const EditProfilePage = () => {
     whatsapp: "",
   });
 
+  // mendapatkan data token
   const token = sessionStorage.getItem("token");
 
+  // handling drop file dengan react-dropzone
   const onDrop = (acceptedFiles) => {
     const uploadedFile = acceptedFiles[0];
 
@@ -44,6 +47,7 @@ const EditProfilePage = () => {
     maxSize: 20 * 1024 * 1024, // Batas maksimal 5 MB
   });
 
+  // handling submit data
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
@@ -97,6 +101,7 @@ const EditProfilePage = () => {
     }
   };
 
+  // handle untuk merubah nilai input
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setValueField({

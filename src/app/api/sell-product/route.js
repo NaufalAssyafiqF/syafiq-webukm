@@ -18,17 +18,16 @@ export async function POST(request) {
 
     const images = formData.getAll("image");
 
+    // validasi jika image kosong
     if (images.length === 0) {
       return NextResponse.json({
         message: "gambar belum diupload",
         isProductAdded: false,
       });
     }
-    console.log({gambar : images.length});
-    
    
     
-    //validasi-validasi
+    // validasi token
     const verifikasiToken = verifyToken(token);
     if (!verifikasiToken) {
         return NextResponse.json({
@@ -36,20 +35,13 @@ export async function POST(request) {
           isProductAdded: false,
         });
     }
-    console.log({token : verifikasiToken});
     
     const userId = verifikasiToken.id
-
-    // if (!dataImage) {
-    //   return NextResponse.json({
-    //     message: "gambar tidak ada",
-    //   });
-    // }
 
     const dateid = Date.now().toString();
     const idProduk = `pr${dateid}`
 
-    //menambah data tabel produk
+    // meanmbah data product baru ke database
     await prisma.Product.create({
         data: {
             user_id: userId,
