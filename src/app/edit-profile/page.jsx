@@ -284,6 +284,7 @@ const EditProfilePage = () => {
               id="instagram"
               value={valueField.instagram}
               onChange={handleInputChange}
+              placeholder="contoh : https://www.instagram.com/hback.art"
               className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-6"
             />
             <label
@@ -298,6 +299,7 @@ const EditProfilePage = () => {
               id="facebook"
               value={valueField.facebook}
               onChange={handleInputChange}
+              placeholder="contoh : https://www.facebook.com/assyafiq.naufal"
               className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-6"
             />
             <label
@@ -312,9 +314,9 @@ const EditProfilePage = () => {
               id="whatsapp"
               value={valueField.whatsapp}
               onChange={handleInputChange}
+              placeholder="contoh : 6281344445555"
               className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 mb-6"
             />
-            
           </div>
           <button
             type="submit"

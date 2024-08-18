@@ -30,6 +30,7 @@ export async function GET(request, { params }) {
         user_id: id,
       },
       select: {
+        user_id: true,
         username: true,
         user_img: true,
         alamat: true,
@@ -37,6 +38,7 @@ export async function GET(request, { params }) {
         deskripsi: true,
         fb_link: true,
         ig_link: true,
+        wa_link: true,
         phone_number: true,
       },
     });

@@ -1,19 +1,19 @@
-import React from 'react'
+import Link from "next/link";
+import React from "react";
 import { FaWhatsapp } from "react-icons/fa";
 
-const PriceCard = ({produk}) => {
+const PriceCard = ({ produk }) => {
+  const message = `Halo ${produk.dataUser?.username} \n apakah produk ini masih tersedia \n http://www.webukm.com/product/${produk.data?.product_id}`;
   // konversi nilai harga ke bentuk rupiah
   const harga = new Intl.NumberFormat("id", {
     style: "currency",
     currency: "IDR",
     maximumFractionDigits: 0,
-  }).format(produk.data?.price_product)
+  }).format(produk.data?.price_product);
   return (
     <div className="bg-white py-5 px-5 h-[239px] flex flex-col justify-center rounded-xl">
       <div className="">
-        <h1 className="font-bold text-3xl leading-8">
-          {harga}
-        </h1>
+        <h1 className="font-bold text-3xl leading-8">{harga}</h1>
         <h2 className="font-medium text-xl">{produk.data?.name_product}</h2>
         <table className="font-normal text-base text-[#52525B] my-2">
           <tbody>
@@ -29,12 +29,23 @@ const PriceCard = ({produk}) => {
             </tr>
           </tbody>
         </table>
-        <button className="bg-[#2E5F9E] text-white py-2 rounded-lg text-center w-full hover:bg-[#44699a]">
-          <FaWhatsapp className="inline-block mr-2 text-2xl" /> Hubungi Penjual
-        </button>
+        <Link
+          href={
+            produk.dataUser?.wa_link
+              ? `https://wa.me/${
+                  produk.dataUser?.wa_link
+                }?text=${encodeURIComponent(message)}`
+              : "#"
+          }
+        >
+          <button className="bg-[#2E5F9E] text-white py-2 rounded-lg text-center w-full hover:bg-[#44699a]">
+            <FaWhatsapp className="inline-block mr-2 text-2xl" /> Hubungi
+            Penjual
+          </button>
+        </Link>
       </div>
     </div>
   );
-}
+};
 
-export default PriceCard
+export default PriceCard;

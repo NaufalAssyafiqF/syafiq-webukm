@@ -14,6 +14,7 @@ import TopBarComponent from "@/components/TopBarComponent";
 import Link from 'next/link';
 
 const ProfileComponent = ({getData, myProfile}) => {
+  const message = `Halo ${getData.dataUser?.username} \n saya ingin bertanya tanya terkait toko anda \n http://www.web-ukm.com/user-profile/${getData.dataUser?.user_id}`;
   return (
     <div className="bg-slate-100">
       <TopBarComponent />
@@ -85,7 +86,11 @@ const ProfileComponent = ({getData, myProfile}) => {
 
               <Link
                 href={
-                  getData.dataUser?.fb_link ? getData.dataUser?.fb_link : "#"
+                  getData.dataUser?.wa_link
+                    ? `https://wa.me/${
+                        getData.dataUser?.wa_link
+                      }?text=${encodeURIComponent(message)}`
+                    : "#"
                 }
               >
                 <div className="bg-[#25d366] text-white py-2 rounded-lg text-center w-full hover:bg-[#2cf575] mt-3">
@@ -95,7 +100,7 @@ const ProfileComponent = ({getData, myProfile}) => {
 
               <Link
                 href={
-                  getData.dataUser?.ig_link ? getData.dataUser?.ig_link : "#"
+                  getData.dataUser?.fb_link ? getData.dataUser?.ig_link : "#"
                 }
               >
                 <div className="bg-[#DD2A7B] text-white py-2 rounded-lg text-center w-full hover:bg-[#f73089] mt-3">

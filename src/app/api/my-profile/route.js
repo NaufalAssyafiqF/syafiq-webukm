@@ -37,6 +37,7 @@ export async function GET() {
         user_id: isTokenVerified.id,
       },
       select: {
+        user_id: true,
         username: true,
         user_img: true,
         alamat: true,
@@ -44,6 +45,7 @@ export async function GET() {
         deskripsi: true,
         fb_link: true,
         ig_link: true,
+        wa_link: true,
         phone_number: true,
       },
     });

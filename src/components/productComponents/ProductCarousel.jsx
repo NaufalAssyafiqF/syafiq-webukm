@@ -20,7 +20,7 @@ const ProductCarousel = ({produk}) => {
   };
 
   return (
-    <div className="w-2/3 relative me-10 overflow-hidden rounded-xl">
+    <div className="w-2/3 min-h-[500px] relative me-10 overflow-hidden rounded-xl">
       <div className="h-[80%] relative overflow-hidden">
         {produk.imgUrl?.map((image, index) => (
           <div

@@ -9,7 +9,7 @@ const ProductPageById = async ({ params }) => {
   // mengambil data dari API
   const response = await fetch(
     `http://localhost:3000/api/product/${params.id}`,
-    { cache: "no-store" }
+    { next: { revalidate: 10 } }
   );
   const produk = await response.json();
 
