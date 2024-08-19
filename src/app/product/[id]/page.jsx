@@ -8,7 +8,7 @@ import ProductDescription from "@/components/productComponents/ProductDescriptio
 const ProductPageById = async ({ params }) => {
   // mengambil data dari API
   const response = await fetch(
-    `http://localhost:3000/api/product/${params.id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/product/${params.id}`,
     { next: { revalidate: 10 } }
   );
   const produk = await response.json();

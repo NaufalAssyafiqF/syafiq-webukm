@@ -80,10 +80,13 @@ const SellPage = () => {
 
     try {
       setMessageError("")
-      const response = await fetch("http://localhost:3000/api/sell-product", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/sell-product`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

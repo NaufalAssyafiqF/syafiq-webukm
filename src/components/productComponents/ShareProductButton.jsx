@@ -12,7 +12,7 @@ import { usePathname } from "next/navigation";
 
 const ShareProductButton = () => {
   const [isCopied, setIsCopied] = useState(false);
-  const pathname = "http://localhost:3000" + usePathname();
+  const pathname = `${process.env.NEXT_PUBLIC_API_URL}` + usePathname();
 
   const shareUrl = pathname
 

@@ -4,9 +4,12 @@ import CardProduct from './CardProduct';
 
 const getDataProduct = async () => {
   // mengambil data dari API
-  const response = await fetch(`http://localhost:3000/api/homepage`, {
-        next: { revalidate: 10 },
-      });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/homepage`,
+    {
+      next: { revalidate: 10 },
+    }
+  );
   const res = await response.json()
   return res
 }

@@ -68,13 +68,16 @@ const EditProfilePage = () => {
 
     try {
       setMessageError("");
-      const response = await fetch("http://localhost:3000/api/edit-profile", {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/edit-profile`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        }
+      );
 
       // if (!response.ok) {
       //   throw new Error(`HTTP error! status: ${response.status}`);

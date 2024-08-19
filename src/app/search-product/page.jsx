@@ -16,7 +16,7 @@ const SearchProductPage = () => {
     // mengambil semua data product dari API berdasarkan query search
     const getFetchData = async () => {
       const response = await fetch(
-        `http://localhost:3000/api/search-product?search=${search}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/search-product?search=${search}`,
         {
           next: { revalidate: 10 },
         }

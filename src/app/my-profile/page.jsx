@@ -16,13 +16,16 @@ const MyProfilePage = () => {
         router.push("/login");
         return;
       }
-      const response = await fetch("/api/my-profile", {
-        method: "GET",
-        next: { revalidate: 10 },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/my-profile`,
+        {
+          method: "GET",
+          next: { revalidate: 10 },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const result = await response.json();
 
       if (response.ok){

@@ -34,12 +34,15 @@ const TopBarComponent = () => {
       }
 
       try {
-        const response = await fetch("/api/topBar/userAvatar", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/topBar/userAvatar`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         const result = await response.json();
 
         if (response.ok) {

@@ -28,7 +28,9 @@ const Products = () => {
 
     // Fetch data produk
     const fetchData = async () => {
-      const response = await fetch("http://localhost:3000/api/filter-product");
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/filter-product`
+      );
       const data = await response.json();
       setProducts(data);
     };

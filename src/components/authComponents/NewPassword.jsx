@@ -42,17 +42,20 @@ const NewPassword = ({ handleUpdatePassword }) => {
     if (newPassword === confirmPassword) {
       try {
         // mengambil data dari API
-        const response = await fetch("/api/forgot-password/new-password", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: userData?.data.email,
-            password: newPassword,
-            token: resetToken,
-          }),
-        });
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/forgot-password/new-password`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: userData?.data.email,
+              password: newPassword,
+              token: resetToken,
+            }),
+          }
+        );
         const result = await response.json();
 
         if (response.ok) {
@@ -82,12 +85,15 @@ const NewPassword = ({ handleUpdatePassword }) => {
       }
 
       try {
-        const response = await fetch("/api/forgot-password/new-password", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${resetToken}`,
-          },
-        });
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/forgot-password/new-password`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${resetToken}`,
+            },
+          }
+        );
         const result = await response.json();
 
         if (response.ok) {

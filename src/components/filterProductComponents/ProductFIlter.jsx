@@ -5,7 +5,6 @@ const ProductFilter = ({ selectedCategories, onCategoryChange }) => {
   const [categories, setCategories] = useState([
     { id: 1, name: "Mobil" },
     { id: 2, name: "Fashion Pria" },
-    // ...
   ]);
 
   useEffect(() => {
