@@ -26,8 +26,7 @@ const EditProfilePage = () => {
     whatsapp: "",
   });
 
-  // mendapatkan data token
-  const token = sessionStorage.getItem("token");
+  
 
   // handling drop file dengan react-dropzone
   const onDrop = (acceptedFiles) => {
@@ -114,6 +113,8 @@ const EditProfilePage = () => {
   };
 
   useEffect(() => {
+    // mendapatkan data token
+    const token = sessionStorage.getItem("token");
     const fetchData = async () => {
       if (!token) {
         return;
