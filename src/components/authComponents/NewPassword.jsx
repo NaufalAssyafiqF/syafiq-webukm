@@ -43,9 +43,9 @@ const NewPassword = ({ handleUpdatePassword }) => {
           `${process.env.NEXT_PUBLIC_API_URL}/api/forgot-password/new-password`,
           {
             method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
+            // headers: {
+            //   "Content-Type": "application/json",
+            // },
             body: JSON.stringify({
               email: userData?.data.email,
               password: newPassword,
