@@ -30,7 +30,7 @@ export async function POST(request) {
 
     // membuat link reset password
     const subject = "Forgot Password Link";
-    const text = `http://localhost:3000/forgot-password/new-password?token=${createToken}`;
+    const text = `${process.env.NEXT_PUBLIC_API_URL}/forgot-password/new-password?token=${createToken}`;
     await sendEmailHandler(email, subject, text);
 
     return NextResponse.json({

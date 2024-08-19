@@ -3,9 +3,7 @@ import { useState, useEffect } from "react";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { FaCheckCircle } from "react-icons/fa";
 import { useRouter, useSearchParams } from "next/navigation";
-import { verifyToken } from "@/libs/jwt";
-import { prisma } from "@prisma/client";
-// import prisma from "@/libs/prisma";
+
 
 const NewPassword = ({ handleUpdatePassword }) => {
   const router = useRouter();
@@ -16,8 +14,7 @@ const NewPassword = ({ handleUpdatePassword }) => {
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState(null);
 
-  const searchParams = useSearchParams();
-  const resetToken = searchParams.get("token");
+  
 
   // membaut handling untuk hide password
   const togglePasswordVisibility = () => {
@@ -78,6 +75,8 @@ const NewPassword = ({ handleUpdatePassword }) => {
 
   useEffect(() => {
     const fetchUserData = async () => {
+      const searchParams = useSearchParams();
+      const resetToken = searchParams.get("token");
       
       if (!resetToken) {
         // setIsLoading(false); // Tidak ada token, tidak perlu fetch
