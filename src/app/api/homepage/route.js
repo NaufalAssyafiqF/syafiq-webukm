@@ -18,6 +18,8 @@ export async function GET(){
            },
          },
        });
+       console.log(getProductDatas);
+       
 
        return NextResponse.json({
          message: "data produk berhasil didapat",
