@@ -83,12 +83,20 @@ export async function PUT(request) {
     if (image !== verifikasiToken.image) {
         
       //set up cloud storage dengan key json file
+      // const storage = new Storage({
+      //   projectId: "web-ukm-427815",
+      //   keyFilename: path.join(
+      //     process.cwd(),
+      //     "public/gcp-key/key-cloudstorage.json"
+      //   ),
+      // });
+
       const storage = new Storage({
-        projectId: "web-ukm-427815",
-        keyFilename: path.join(
-          process.cwd(),
-          "public/gcp-key/key-cloudstorage.json"
-        ),
+        projectId: process.env.GCP_PROJECT_ID,
+        credentials: {
+          client_email: process.env.GCP_CLIENT_EMAIL,
+          private_key: process.env.GCP_PRIVATE_KEY.replace(/\\n/g, "\n"),
+        },
       });
 
       //menghubungkan ke folder cloud storage
@@ -115,7 +123,6 @@ export async function PUT(request) {
 
         try {
           await oldFile.delete();
-          console.log(`Gambar lama ${oldFileName} berhasil dihapus.`);
         } catch (err) {
           console.error(`Gagal menghapus gambar lama: ${err.message}`);
         }

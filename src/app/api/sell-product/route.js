@@ -55,9 +55,17 @@ export async function POST(request) {
     })
 
     //set up cloud storage dengan key json file
+    // const storage = new Storage({
+    //   projectId: "web-ukm-427815",
+    //   keyFilename: path.join(process.cwd(), "public/gcp-key/key-cloudstorage.json"),
+    // });
+
     const storage = new Storage({
-      projectId: "web-ukm-427815",
-      keyFilename: path.join(process.cwd(), "public/gcp-key/key-cloudstorage.json"),
+      projectId: process.env.GCP_PROJECT_ID,
+      credentials: {
+        client_email: process.env.GCP_CLIENT_EMAIL,
+        private_key: process.env.GCP_PRIVATE_KEY.replace(/\\n/g, "\n"),
+      },
     });
 
     //menghubungkan ke folder cloud storage
