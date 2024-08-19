@@ -58,8 +58,7 @@ export async function POST(request) {
         isCreated: false,
         message: "Failed to create account. Please try again later.",
         errorMessage: error.message,
-      },
-      { status: 500 }
+      }
     );
   }
 }

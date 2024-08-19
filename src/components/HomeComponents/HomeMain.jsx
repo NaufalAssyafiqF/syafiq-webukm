@@ -36,7 +36,7 @@ const HomeMain = () => {
           <CardIcon icon="/images/properti-icon.png" textIcon="Properti" />
           <CardIcon
             icon="/images/jasa-icon.png"
-            textIcon="Perlengkapan Bayi & anak"
+            textIcon="Perlengkapan Bayi & Anak"
           />
           <CardIcon icon="/images/all-icon.png" textIcon="Semua Kategori" />
         </div>

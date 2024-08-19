@@ -28,7 +28,7 @@ const CardProduct = ({dataProduk}) => {
             src={dataProduk.user?.user_img}
             alt=""
             className="w-8 h-8 rounded-full"
-            lazy={true}
+            loading="lazy"
           />
           <div className="ms-2">
             <h1 className="text-[#3F3F46] text-sm">
@@ -42,7 +42,7 @@ const CardProduct = ({dataProduk}) => {
             src={dataProduk.image_urls[0].image_url}
             alt=""
             className="w-72 h-72 object-contain"
-            lazy={true}
+            loading="lazy"
           />
         </div>
         <div className="px-2 flex flex-col gap-y-1">

@@ -13,6 +13,8 @@ const NewPassword = ({ handleUpdatePassword }) => {
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState(null);
+  const searchParams = useSearchParams();
+  const resetToken = searchParams.get("token");
 
   
 
@@ -80,8 +82,7 @@ const NewPassword = ({ handleUpdatePassword }) => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const searchParams = useSearchParams();
-      const resetToken = searchParams.get("token");
+      
       
       if (!resetToken) {
         // setIsLoading(false); // Tidak ada token, tidak perlu fetch
@@ -114,8 +115,8 @@ const NewPassword = ({ handleUpdatePassword }) => {
   }, []);
 
   return (
-    <div class="w-[538px] h-[461px] dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-      <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+    <div className="w-[538px] h-[461px] dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+      <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
         <div className="flex flex-col gap-y-[12px]">
           <h1 className="text-center font-bold text-[#3C6EBC] text-2xl">
             Create New Password

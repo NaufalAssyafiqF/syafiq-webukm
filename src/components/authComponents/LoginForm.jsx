@@ -53,13 +53,13 @@ const LoginForm = () => {
   };
 
   return (
-    <div class="w-[538px] h-[461px] dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-      <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+    <div className="w-[538px] h-[461px] dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+      <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
         <div className="flex flex-col gap-y-[12px]">
           <h1 className="text-center font-bold text-[#3C6EBC] text-2xl">
             Sign In
           </h1>
-          <h1 class="text-xl font-normal leading-tight tracking-tight text-[#71717A] md:text-xs dark:text-white text-center ">
+          <h1 className="text-xl font-normal leading-tight tracking-tight text-[#71717A] md:text-xs dark:text-white text-center ">
             Sign in to your account
           </h1>
         </div>
