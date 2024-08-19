@@ -28,6 +28,10 @@ const RegisterForm = ({ onFormSubmit }) => {
     const newPassword = formData.get("newPassword");
     const confirmPassword = formData.get("password");
 
+    formData.append("email", event.target.email.value);
+    formData.append("username", username);
+    formData.append("password", newPassword);
+
     // setPasswordsMatch(newPassword === confirmPassword);
 
     if (newPassword === confirmPassword) {
@@ -36,14 +40,15 @@ const RegisterForm = ({ onFormSubmit }) => {
           `${process.env.NEXT_PUBLIC_API_URL}/api/register`,
           {
             method: "POST",
+            body: formData,
             // headers: {
             //   "Content-Type": "application/json",
             // },
-            body: JSON.stringify({
-              email: email,
-              username: username,
-              password: newPassword,
-            }),
+            // body: JSON.stringify({
+            //   email: email,
+            //   username: username,
+            //   password: newPassword,
+            // }),
           }
         );
         const result = await response.json();

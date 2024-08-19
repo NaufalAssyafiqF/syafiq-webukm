@@ -4,8 +4,13 @@ import prisma from "@/libs/prisma";
 
 export async function POST(request) {
   try {
-    const data = await request.json();
-    const { email, username, password } = data;
+    // const data = await request.json();
+    // const { email, username, password } = data;
+
+    const formData = await request.formData();
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const username = formData.get("username");
 
     // mengambil data user berdasarkan email
     const existingEmail = await prisma.user.findUnique({

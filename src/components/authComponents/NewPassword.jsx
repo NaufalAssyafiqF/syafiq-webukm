@@ -33,6 +33,10 @@ const NewPassword = ({ handleUpdatePassword }) => {
     const newPassword = formData.get("newPassword");
     const confirmPassword = formData.get("confirmPassword");
 
+    formData.append("newPassword", newPassword);
+    formData.append("token", resetToken);
+    formData.append("email", userData?.data.email);
+
     // validasi password tidak sama
     setPasswordsMatch(newPassword === confirmPassword);
 
@@ -43,14 +47,15 @@ const NewPassword = ({ handleUpdatePassword }) => {
           `${process.env.NEXT_PUBLIC_API_URL}/api/forgot-password/new-password`,
           {
             method: "PUT",
+            body: formData,
             // headers: {
             //   "Content-Type": "application/json",
             // },
-            body: JSON.stringify({
-              email: userData?.data.email,
-              password: newPassword,
-              token: resetToken,
-            }),
+            // body: JSON.stringify({
+            //   email: userData?.data.email,
+            //   password: newPassword,
+            //   token: resetToken,
+            // }),
           }
         );
         const result = await response.json();

@@ -7,8 +7,10 @@ import { cookies } from "next/headers";
 
 export async function POST(request) {
   try {
-    const data = await request.json();
-    const { email, password } = data;
+    const formData = await request.formData();
+    const email = formData.get("email");
+    const password = formData.get("password");
+    
 
     // mengambil data user berdasarkan email
     const user = await prisma.user.findUnique({

@@ -15,7 +15,6 @@ export async function GET() {
     );
   }
   const token = authHeader.split(" ")[1];
-  console.log({token: token});
   try {
 
     const decodeToken = verifyToken(token);
@@ -45,8 +44,13 @@ export async function GET() {
 
 export async function PUT(request) {
   try {
-    const data = await request.json();
-    const { email, password, token } = data;
+    // const data = await request.json();
+    // const { email, password, token } = data;
+
+    const formData = await request.formData();
+    const email = formData.get("email");
+    const password = formData.get("newPassword");
+    const token = formData.get("token");
     console.log({email: email, password: password, token: token});
 
     const decodedToken = verifyToken(token);

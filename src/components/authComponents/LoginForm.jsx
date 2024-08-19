@@ -16,8 +16,8 @@ const LoginForm = () => {
     setLoading(true);
     
     const formData = new FormData(event.target);
-    const email = formData.get("email");
-    const password = formData.get("password");
+    formData.append("email", event.target.email.value);
+    formData.append("password", event.target.password.value);
 
     try {
       // mengambil data dari API
@@ -25,13 +25,7 @@ const LoginForm = () => {
         `${process.env.NEXT_PUBLIC_API_URL}/api/login`,
         {
           method: "POST",
-          // headers: {
-          //   "Content-Type": "application/json",
-          // },
-          body: JSON.stringify({
-            email: email,
-            password: password,
-          }),
+          body: formData
         }
       );
       const result = await response.json();

@@ -13,19 +13,20 @@ const ForgotPassword = () => {
     setLoading(true)
 
     const formData = new FormData(event.target);
-    const email = formData.get("email");
+    formData.append("email", event.target.email.value);
 
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/forgot-password`,
         {
           method: "POST",
+          body: formData,
           // headers: {
           //   "Content-Type": "application/json",
           // },
-          body: JSON.stringify({
-            email: email,
-          }),
+          // body: JSON.stringify({
+          //   email: email,
+          // }),
         }
       );
       const result = await response.json();

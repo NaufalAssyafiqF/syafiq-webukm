@@ -5,8 +5,10 @@ import { NextResponse, NextRequest } from "next/server";
 
 export async function POST(request) {
   try {
-    const data = await request.json();
-    const { email } = data;
+    // const data = await request.json();
+    // const { email } = data;
+    const formData = await request.formData();
+    const email = formData.get("email");
 
     // mengambil data user berdasarkan email
     const user = await prisma.user.findUnique({
