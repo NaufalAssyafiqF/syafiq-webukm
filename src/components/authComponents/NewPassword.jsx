@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { FaCheckCircle } from "react-icons/fa";
 import { useRouter, useSearchParams } from "next/navigation";
+import axios from "axios";
 
 
 const NewPassword = ({ handleUpdatePassword }) => {
@@ -44,25 +45,11 @@ const NewPassword = ({ handleUpdatePassword }) => {
 
     if (newPassword === confirmPassword) {
       try {
-        // mengambil data dari API
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/forgot-password/new-password`,
-          {
-            method: "PUT",
-            body: formData,
-            // headers: {
-            //   "Content-Type": "application/json",
-            // },
-            // body: JSON.stringify({
-            //   email: userData?.data.email,
-            //   password: newPassword,
-            //   token: resetToken,
-            // }),
-          }
-        );
-        const result = await response.json();
+        
+        const response = await axios.put("/api/forgot-password/new-password", formData);
+        const result = response.data
 
-        if (response.ok) {
+        if (response.status === 200) {
           handleUpdatePassword();
         } else {
           console.error(result.error);

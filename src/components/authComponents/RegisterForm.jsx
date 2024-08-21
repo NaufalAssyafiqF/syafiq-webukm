@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import Link from "next/link";
 import React from "react";
 import { useState } from "react";
@@ -36,24 +37,11 @@ const RegisterForm = ({ onFormSubmit }) => {
 
     if (newPassword === confirmPassword) {
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/register`,
-          {
-            method: "POST",
-            body: formData,
-            // headers: {
-            //   "Content-Type": "application/json",
-            // },
-            // body: JSON.stringify({
-            //   email: email,
-            //   username: username,
-            //   password: newPassword,
-            // }),
-          }
-        );
-        const result = await response.json();
 
-        if (response.ok) {
+        const response = await axios.post("/api/register", formData)
+        const result = response.data
+
+        if (response.status === 200) {
           onFormSubmit();
         } else {
           console.error(result.error);

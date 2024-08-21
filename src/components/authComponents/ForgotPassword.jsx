@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -16,22 +17,11 @@ const ForgotPassword = () => {
     formData.append("email", event.target.email.value);
 
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/forgot-password`,
-        {
-          method: "POST",
-          body: formData,
-          // headers: {
-          //   "Content-Type": "application/json",
-          // },
-          // body: JSON.stringify({
-          //   email: email,
-          // }),
-        }
-      );
-      const result = await response.json();
 
-      if (response.ok) {
+      const response = await axios.post("/api/forgot-password", formData);
+      const result = response.data;
+
+      if (response.status === 200) {
         setMessage(result.message);
       } else {
         setMessageError(result.message);

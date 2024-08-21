@@ -2,6 +2,7 @@
 import FooterComponent from "@/components/FooterComponent";
 import CardProduct from "@/components/HomeComponents/CardProduct";
 import TopBarComponent from "@/components/TopBarComponent";
+import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -15,14 +16,13 @@ const SearchProductPage = () => {
     if (!search) return;
     // mengambil semua data product dari API berdasarkan query search
     const getFetchData = async () => {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/search-product?search=${search}`,
-        {
-          next: { revalidate: 10 },
-        }
-      );
-      const data = await response.json();
-      setDataProduct(data);
+      const response = await axios.get(`/api/search-product?search=${search}`,{
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      const result = response.data
+      setDataProduct(result);
     };
 
     getFetchData();

@@ -2,6 +2,7 @@
 import FooterComponent from "@/components/FooterComponent";
 import CardProduct from "@/components/HomeComponents/CardProduct";
 import TopBarComponent from "@/components/TopBarComponent";
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 const Products = () => {
@@ -26,17 +27,19 @@ const Products = () => {
       setSelectedCategories([initialCategory]);
     }
 
-    // Fetch data produk
     const fetchData = async () => {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/filter-product`
-      );
-      const data = await response.json();
-      setProducts(data);
+      const response = await axios.get("/api/filter-product", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const result = response.data;
+      setProducts(result);
     };
     fetchData();
   }, []);
 
+  // handle untuk meruabh kategori
   const handleCategoryChange = (category) => {
     setSelectedCategories((prevSelected) =>
       prevSelected.includes(category)
@@ -80,6 +83,7 @@ const Products = () => {
             ))}
           </div>
         </div>
+
         <div className="w-[75%] grid gap-3 grid-cols-3 grid-rows-3 mt-5 bg-white p-4 rounded">
           {filteredProducts?.map((product, index) => (
             <CardProduct key={index} dataProduk={product} />

@@ -1,22 +1,31 @@
-import React from 'react'
-import CardProduct from './CardProduct';
+"use client";
+import React, { useEffect, useState } from "react";
+import CardProduct from "./CardProduct";
+import axios from "axios";
 
 
-const getDataProduct = async () => {
-  // mengambil data dari API
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/homepage`,
-    {
-      next: { revalidate: 10 },
-    }
-  );
-  const res = await response.json()
-  return res
-}
 
-const ProductSection = async () => {
-  const dataProduct = await getDataProduct()
-  
+const ProductSection = () => {
+  const [dataProduct, setDataProduct] = useState(null);
+
+  useEffect(() => {
+    const getDataProduct = async () => {
+      try {
+        const response = await axios.get("/api/homepage", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        setDataProduct(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getDataProduct();
+  }, []);
+
   return (
     <div className="px-10 py-4 mt-10 bg-white mx-10 rounded-md">
       <div className="flex justify-between">
@@ -25,13 +34,19 @@ const ProductSection = async () => {
         </h1>
       </div>
 
-      <div className="grid gap-4 grid-cols-4">
-        {dataProduct.data?.map((product, index) => (
-          <CardProduct dataProduk={product} key={index}/>
-        ))}
-      </div>
+      {dataProduct ? (
+        <div className="grid gap-4 grid-cols-4">
+          {dataProduct.data?.map((product, index) => (
+            <CardProduct dataProduk={product} key={index} />
+          ))}
+        </div>
+      ) : (
+        <div className="text-center w-full text-[#3C6EBC] font-semibold">
+          Data sedang dimuat...
+        </div>
+      )}
     </div>
   );
-}
+};
 
-export default ProductSection
+export default ProductSection;

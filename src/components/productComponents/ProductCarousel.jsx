@@ -15,6 +15,7 @@ const ProductCarousel = ({produk}) => {
     setActiveIndex((activeIndex - 1 + produk.imgUrl.length) % produk.imgUrl.length);
   };
 
+
   const goToSlide = (index) => {
     setActiveIndex(index);
   };

@@ -1,4 +1,5 @@
-"use client"
+"use client";
+import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -14,25 +15,20 @@ const LoginForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-    
+
     const formData = new FormData(event.target);
     formData.append("email", event.target.email.value);
     formData.append("password", event.target.password.value);
 
     try {
-      // mengambil data dari API
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/login`,
-        {
-          method: "POST",
-          body: formData
-        }
-      );
-      const result = await response.json();
+      const response = await axios.post(`/api/login`, formData);
 
-      if (response.ok) {
+      const result = response.data;
+
+      if (response.status === 200) {
         // menyimpan token pada session storage
-        sessionStorage.setItem("token", result.token); 
+
+        sessionStorage.setItem("token", result.token);
 
         router.push("/");
       } else {
@@ -41,11 +37,10 @@ const LoginForm = () => {
       }
     } catch (error) {
       console.error("Terjadi kesalahan:", error);
-      setErrorMessage(result.message);
+      setErrorMessage(response.message);
     } finally {
       setLoading(false);
     }
-
   };
 
   const togglePasswordVisibility = () => {
@@ -143,6 +138,6 @@ const LoginForm = () => {
       </div>
     </div>
   );
-}
+};
 
-export default LoginForm
+export default LoginForm;

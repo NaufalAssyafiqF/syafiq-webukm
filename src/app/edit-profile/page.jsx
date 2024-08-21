@@ -1,6 +1,7 @@
 "use client";
 import FooterComponent from "@/components/FooterComponent";
 import TopBarComponent from "@/components/TopBarComponent";
+import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
@@ -67,24 +68,27 @@ const EditProfilePage = () => {
 
     try {
       setMessageError("");
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/edit-profile`,
-        {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: formData,
-        }
-      );
+      // const response = await fetch(
+      //   `${process.env.NEXT_PUBLIC_API_URL}/api/edit-profile`,
+      //   {
+      //     method: "PUT",
+      //     headers: {
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //     body: formData,
+      //   }
+      // );
+      // const result = await response.json();
+      const response = await axios.put("/api/edit-profile", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      });
 
-      // if (!response.ok) {
-      //   throw new Error(`HTTP error! status: ${response.status}`);
-      // }
-
-      // setMessageError(response.)
-
-      const result = await response.json();
+      const result = response.data;
+      console.log(result);
+      
       if (result.isUpdated) {
         setIsUpdated(true);
         sessionStorage.setItem("token", result.token);
@@ -119,14 +123,15 @@ const EditProfilePage = () => {
       if (!token) {
         return;
       }
-      const response = await fetch("/api/edit-profile", {
-        method: "GET",
+
+      const response = await axios.get("/api/edit-profile", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
         },
-      });
-      const result = await response.json();
-      if (response.ok) {
+      })
+      const result = response.data;
+      if (response.status === 200) {
         setGetData(result.data);
         setFile(result.data?.user_img);
         setImage(result.data?.user_img);

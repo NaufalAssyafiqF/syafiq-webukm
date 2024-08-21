@@ -6,7 +6,9 @@ export async function GET() {
   const authHeader = headers().get("Authorization");
 
   if (!authHeader) {
-    return NextResponse.json({ error: "Unauthorized", isTokenVerified: false });
+    return NextResponse.json({ error: "Unauthorized", isTokenVerified: false },{
+      status: 401
+    });
   }
   try {
     // mengambil token & verifikasi token

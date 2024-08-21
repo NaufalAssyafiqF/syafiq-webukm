@@ -63,7 +63,7 @@ export async function PUT(request) {
   const whatsapp = formData.get("wa_link");
 
   const image = formData.get("image");
-
+  
 
   try {
     // verifikasi token dan validasi token
