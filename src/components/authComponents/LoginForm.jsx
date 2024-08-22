@@ -37,7 +37,7 @@ const LoginForm = () => {
       }
     } catch (error) {
       console.error("Terjadi kesalahan:", error);
-      setErrorMessage(response.message);
+      setErrorMessage(result.message);
     } finally {
       setLoading(false);
     }
