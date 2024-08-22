@@ -1,3 +1,4 @@
+import prisma from "@/libs/prisma";
 import { NextResponse } from "next/server";
 import { IoGameController } from "react-icons/io5";
 
