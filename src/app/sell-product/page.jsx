@@ -1,6 +1,7 @@
 "use client";
 import FooterComponent from "@/components/FooterComponent";
 import TopBarComponent from "@/components/TopBarComponent";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { useState } from "react";
@@ -80,22 +81,15 @@ const SellPage = () => {
 
     try {
       setMessageError("")
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/sell-product`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      
+      const response = await axios.post("/api/sell-product", formData)
 
-      if (!response.ok) {
+      if (!response.status == 200) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       
       
-      // setMessageError(response.)
-
-      const result = await response.json();
+      const result = response.data
       if (result.isProductAdded) {
         setIsProductAdded(true)
       }else {

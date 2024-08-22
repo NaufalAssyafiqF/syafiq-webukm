@@ -1,4 +1,5 @@
 import { verifyToken } from "@/libs/jwt";
+import prisma from "@/libs/prisma";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
@@ -58,10 +59,15 @@ export async function GET() {
       data: getProductDatas,
     });
   } catch (error) {
-    return NextResponse.json({
-      message: "terhadi kesalahan pada server, coba dilain waktu",
-      errorMessage: error.message
-    })
+    return NextResponse.json(
+      {
+        message: "terjadi kesalahan pada server, coba dilain waktu",
+        errorMessage: error.message,
+      },
+      {
+        status: 500,
+      }
+    );
   }
   
 }

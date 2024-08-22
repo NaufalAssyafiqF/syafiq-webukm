@@ -68,17 +68,7 @@ const EditProfilePage = () => {
 
     try {
       setMessageError("");
-      // const response = await fetch(
-      //   `${process.env.NEXT_PUBLIC_API_URL}/api/edit-profile`,
-      //   {
-      //     method: "PUT",
-      //     headers: {
-      //       Authorization: `Bearer ${token}`,
-      //     },
-      //     body: formData,
-      //   }
-      // );
-      // const result = await response.json();
+  
       const response = await axios.put("/api/edit-profile", formData, {
         headers: {
           "Content-Type": "multipart/form-data",

@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { startTransition } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 
 const TopBarComponent = () => {
@@ -34,18 +35,15 @@ const TopBarComponent = () => {
       }
 
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/topBar/userAvatar`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        const result = await response.json();
+        
+        const response = await axios.get("/api/topBar/userAvatar", {
+          headers: {
+           " Authorization": `Bearer ${token}`,
+          },
+        });
+        const result = response.data
 
-        if (response.ok) {
+        if (response.status == 200) {
           setUserData(result);
         } else {
           console.error("gagal mengambil data pengguna")
