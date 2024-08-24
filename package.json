@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma migrate deploy && prisma generate"
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@google-cloud/storage": "^7.12.0",

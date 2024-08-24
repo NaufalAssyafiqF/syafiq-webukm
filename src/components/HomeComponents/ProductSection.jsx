@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import CardProduct from "./CardProduct";
 import axios from "axios";
 
-
-
 const ProductSection = () => {
   const [dataProduct, setDataProduct] = useState(null);
+  console.log(dataProduct);
+  
 
   useEffect(() => {
     const getDataProduct = async () => {
@@ -14,9 +14,13 @@ const ProductSection = () => {
         const response = await axios.get("/api/homepage", {
           headers: {
             "Content-Type": "application/json",
+            "Cache-Control": "no-cache",
           },
+          
         });
-
+        console.log(response.data);
+        
+        // const shuffledData = response.data.sort(() => Math.random() - 0.5);
         setDataProduct(response.data);
       } catch (error) {
         console.error(error);
