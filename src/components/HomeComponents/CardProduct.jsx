@@ -46,7 +46,7 @@ const CardProduct = ({dataProduk}) => {
           />
         </div>
         <div className="px-2 flex flex-col gap-y-1">
-          <h1 className="text-[#71717A] text-base font-medium">
+          <h1 className="text-[#71717A] text-base font-medium truncate">
             {dataProduk.name_product}
           </h1>
           <h2 className="font-semibold">{harga}</h2>

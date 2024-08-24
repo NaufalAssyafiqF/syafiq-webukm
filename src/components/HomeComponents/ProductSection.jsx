@@ -5,8 +5,6 @@ import axios from "axios";
 
 const ProductSection = () => {
   const [dataProduct, setDataProduct] = useState(null);
-  console.log(dataProduct);
-  
 
   useEffect(() => {
     const getDataProduct = async () => {
@@ -16,11 +14,8 @@ const ProductSection = () => {
             "Content-Type": "application/json",
             "Cache-Control": "no-cache",
           },
-          
         });
-        console.log(response.data);
-        
-        // const shuffledData = response.data.sort(() => Math.random() - 0.5);
+
         setDataProduct(response.data);
       } catch (error) {
         console.error(error);
@@ -31,7 +26,7 @@ const ProductSection = () => {
   }, []);
 
   return (
-    <div className="px-10 py-4 mt-10 bg-white mx-10 rounded-md">
+    <div className="px-5 py-4 mt-10 bg-white mx-10 rounded-md">
       <div className="flex justify-between">
         <h1 className="text-xl font-semibold text-[#3C6EBC] mb-5">
           Rekomendasi Produk & Jasa
@@ -39,10 +34,12 @@ const ProductSection = () => {
       </div>
 
       {dataProduct ? (
-        <div className="grid gap-4 grid-cols-4">
-          {dataProduct.data?.map((product, index) => (
-            <CardProduct dataProduk={product} key={index} />
-          ))}
+        <div className="flex flex-wrap gap-x-4 justify-start">
+          {dataProduct.data
+            ?.sort(() => Math.random() - 0.5) // Mengacak data sebelum di-mapping
+            .map((product, index) => (
+              <CardProduct dataProduk={product} key={index} />
+            ))}
         </div>
       ) : (
         <div className="text-center w-full text-[#3C6EBC] font-semibold">

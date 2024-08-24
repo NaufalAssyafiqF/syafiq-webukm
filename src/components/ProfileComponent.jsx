@@ -26,7 +26,7 @@ const ProfileComponent = ({getData, myProfile}) => {
             </h1>
             <div>
               <img
-                className="mb-2 w-full h-[270px] rounded"
+                className="mb-2 w-full aspect-square rounded"
                 src={getData.dataUser?.user_img}
                 alt=""
               />
