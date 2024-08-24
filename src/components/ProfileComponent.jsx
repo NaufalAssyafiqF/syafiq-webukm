@@ -130,7 +130,7 @@ const ProfileComponent = ({getData, myProfile}) => {
               </h1>
             </div>
           ) : (
-            <div className="w-full h-full grid gap-3 grid-cols-3">
+            <div className="flex flex-wrap gap-x-4 justify-start">
               {getData.data?.map((product, index) => (
                 <CardProduct key={index} dataProduk={product} />
               ))}

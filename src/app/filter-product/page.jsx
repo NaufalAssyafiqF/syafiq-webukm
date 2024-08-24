@@ -84,7 +84,7 @@ const Products = () => {
           </div>
         </div>
 
-        <div className="w-[75%] grid gap-3 grid-cols-3 grid-rows-3 mt-5 bg-white p-4 rounded">
+        <div className="w-[75%] flex flex-wrap gap-x-4 justify-start mt-5 bg-white p-4 rounded">
           {filteredProducts?.map((product, index) => (
             <CardProduct key={index} dataProduk={product} />
           ))}

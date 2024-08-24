@@ -47,7 +47,7 @@ const SearchProductPage = () => {
           </h1>
         </div>
 
-        <div className="grid gap-4 grid-cols-4">
+        <div className="flex flex-wrap gap-x-4 justify-start">
           {dataProduct.data?.map((product) => (
             <CardProduct dataProduk={product} key={product.id} />
           ))}
