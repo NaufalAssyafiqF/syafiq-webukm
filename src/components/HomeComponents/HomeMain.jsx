@@ -13,7 +13,7 @@ const HomeMain = () => {
         <h1 className="text-xl font-semibold text-[#3C6EBC] mb-5">
           Jelajahi Web UKM
         </h1>
-        <div className="flex">
+        <div className="flex justify-center">
           <CardIcon icon="/images/jasa-icon.png" textIcon="Jasa"/>
           <CardIcon
             icon="/images/elektronik-icon.png"
