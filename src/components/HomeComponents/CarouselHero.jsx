@@ -43,22 +43,22 @@ export default function CarouselHero() {
     };
 
   return (
-    <div className="slider-container relative">
+    <div className="slider-container relative overflow-hidden">
       <Slider {...settings} className="w-full h-full">
-        <div className='w-full h-[50vh]'>
-            <img src="/images/hero1.webp" alt="" className='w-full h-full object-fill'/>
+        <div className='w-full h-full'>
+            <img src="/images/hero1.webp" alt="" className='w-full h-[50vh] object-fill'/>
         </div>
-        <div className='w-full h-[50vh]'>
-            <img src="/images/hero2.webp" alt="" className='w-full h-full object-fill'/>
+        <div className='w-full h-full'>
+            <img src="/images/hero2.webp" alt="" className='w-full h-[50vh] object-fill'/>
         </div>
-        <div className='w-full h-[50vh]'>
-            <img src="/images/hero3.jpg" alt="" className='w-full h-full object-fill'/>
+        <div className='w-full h-full'>
+            <img src="/images/hero3.jpg" alt="" className='w-full h-[50vh] object-fill'/>
         </div>
-        <div className='w-full h-[50vh]'>
-            <img src="/images/hero4.jpg" alt="" className='w-full h-full object-fill'/>
+        <div className='w-full h-full'>
+            <img src="/images/hero4.jpg" alt="" className='w-full h-[50vh] object-fill'/>
         </div>
-        <div className='w-full h-[50vh]'>
-            <img src="/images/hero5.jpg" alt="" className='w-full h-full object-fill'/>
+        <div className='w-full h-full'>
+            <img src="/images/hero5.jpg" alt="" className='w-full h-[50vh] object-fill'/>
         </div>
       </Slider>
     </div>
