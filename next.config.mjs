@@ -3,7 +3,7 @@ const nextConfig = {
   env: {
     JWT_SECRET: process.env.JWT_SECRET,
   },
-  serverExternalPackages: ["@prisma/client"],
+  // serverExternalPackages: ["@prisma/client"],
 };
 
 export default nextConfig;

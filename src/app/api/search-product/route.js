@@ -10,7 +10,8 @@ export async function GET(request) {
     const getProductDatas = await prisma.Product.findMany({
       where: {
         name_product: {
-          search: query,
+          contains: query,
+          mode: "insensitive",
         },
       },
       include: {
